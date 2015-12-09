@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema/"
+  xmlns:xmp="http://ns.adobe.com/xap/1.0/"
+  targetNamespace="http://sbaechler.github.io/rmd/"
+  xmlns:rmd="http://sbaechler.github.io/rmd/"
+  elementFormDefault="qualified">
+
+<xs:element name="rmd:Responsiveness">
+  <xs:complexType>
+    <xs:bag>
+      <xs_element name="AllowedDerivates" type="AllowedDerivates" />
+      <xs_element name="AppliedToDimensions" type="Dimensions" />
+      <xs_element name="FrameArea" type="Area" />
+
+    </xs:bag>
+  </xs:complexType>
+</xs:element>
+</xs:schema>
+
+<!--
+http://www.w3schools.com/xml/schema_complex.asp
+-->

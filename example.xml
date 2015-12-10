@@ -20,7 +20,7 @@
             <rmd:AllowedDerivates>
               <rdf:Bag>
                 <rdf:li rdf:parseType="Resource">
-                  <rdf:Crop>all</rdf:Crop>
+                  <rmd:Crop>all</rmd:Crop>
                 </rdf:li>
               </rdf:Bag>
             </rmd:AllowedDerivates>

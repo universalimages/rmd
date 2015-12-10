@@ -91,6 +91,7 @@ Either MaxWidth or theAspectRatio fields must be specified for a frame to be con
 ## Value Types
 
 ### XMP Area
+For reference, the XMP Area definition which is part of the XMP namespace is described here.
 This structure represents an area. Similar to Dimensions (stDim) the “unit” field describes the specific unit being used. This is based on the definition of Exif SubjectArea. The following table gives an overview of the different types and properties being used.
 
 <table>

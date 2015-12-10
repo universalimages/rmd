@@ -31,10 +31,13 @@ The following data can be stored:
   <tr><td>rmd:AllowedDerivates</td><td>Bag of AllowedDerivates</td><td>yes</td>
     <td>Lists the allowed operations.</td>
   </tr>
-  <tr><td>rmd:FrameArea</td><td>XMP Area Rectangle</td><td>yes</td>
-    <td>Specifies the outer limits of the visible area. If this tag is present, the image should be cropped to those values. The outer part should only be used if the target aspect ratio differs from the source aspect ratio.
+  <tr><td>rmd:CropArea</td><td>XMP Area Rectangle</td><td>yes</td>
+    <td>Specifies the outer limits of the visible area. The outer area is considered the bleed. If this tag is present, the image should be cropped to those values. The outer part should only be used if the target aspect ratio differs from the source aspect ratio.
   <tr><td>rmd:SafeArea</td><td>XMP Area Rectangle</td><td>yes</td>
     <td>An area that cannot be cropped into. This area holds the relevant information within the image.</td>
+  </tr>
+  <tr><td>rmd:MinWidth</td><td>real</td><td>yes</td>
+    <td>The minimal viewport width (dp) required to show the full image. If the width is smaller, the image can be cropped.</td>
   </tr>
   <tr><td>rmd:RecommendedFrames</td><td>Bag of FrameStruct</td><td>yes</td>
     <td>A list of recommended crop regions for different output sizes</td>
@@ -59,12 +62,10 @@ The following data can be stored:
 </table>
 
 ### FrameStruct
+Extends XMP Rectangle Area (Requires stArea:x, stArea:y, stArea:w, stArea:h, see below)
 <table>
 <tr><th>Field Name</th><th>Value Type</th>
   <th>Optional</th><th>Description</th>
-</tr>
-<tr><td>rmd:Area</td><td>Area</td><td>no</td>
-  <td>Area that describes the region</td>
 </tr>
 <tr><td>rmd:MinAspectRatio</td><td>real</td><td>yes</td>
   <td>Allows to specify the minimum aspect ratio for which this region can be used.</td>

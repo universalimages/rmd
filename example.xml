@@ -33,16 +33,16 @@
               <stArea:unit>normalized</stArea:unit>
             </rmd:SafeArea>
 
+            <rmd:MinWidth>360</rmd:MinWidth>
+
             <rmd:RecommendedFrames>
               <rdf:Bag>
                 <rdf:li rdf:parseType="Resource">
-                  <rmd:Area rdf:parseType="Resource">
-                     <stArea:x>0.5</stArea:x>
-                     <stArea:y>0.6</stArea:y>
-                     <stArea:h>0.8</stArea:h>
-                     <stArea:w>0.8</stArea:w>
-                     <stArea:unit>normalized</stArea:unit>
-                  </rmd:Area>
+                  <stArea:x>0.5</stArea:x>
+                  <stArea:y>0.6</stArea:y>
+                  <stArea:h>0.8</stArea:h>
+                  <stArea:w>0.8</stArea:w>
+                  <stArea:unit>normalized</stArea:unit>
                   <rmd:MaxWidth>360</rmd:MaxWidth>
                 </rdf:li>
               </rdf:Bag>

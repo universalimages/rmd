@@ -6,7 +6,7 @@
          <xmp:CreatorTool>Lightroom</xmp:CreatorTool>
       </rdf:Description>
       <rdf:Description rdf:about=""
-          xmlns:rmd="http://sbaechler.github.io/rmd/"
+          xmlns:rmd="http://universalimages.github.io/rmd/"
           xmlns:stDim="http://ns.adobe.com/xap/1.0/sType/Dimensions#"
           xmlns:stArea="http://ns.adobe.com/xmp/sType/Area#">
           <rmd:Responsiveness rdf:parseType="Resource">

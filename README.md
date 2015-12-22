@@ -32,7 +32,8 @@ The following data can be stored:
     <td>Lists the allowed operations.</td>
   </tr>
   <tr><td>rmd:CropArea</td><td>XMP Area Rectangle</td><td>yes</td>
-    <td>Specifies the outer limits of the visible area. The outer area is considered the bleed. If this tag is present, the image should be cropped to those values. The outer part should only be used if the target aspect ratio differs from the source aspect ratio.
+    <td>Specifies the outer limits of the visible area. The outer area is considered the bleed. If this tag is present, the image should be cropped to those values. The outer part should only be used if the target aspect ratio differs from the source aspect ratio.</td>
+  </tr>
   <tr><td>rmd:SafeArea</td><td>XMP Area Rectangle</td><td>yes</td>
     <td>An area that cannot be cropped into. This area holds the relevant information within the image.</td>
   </tr>
@@ -41,6 +42,7 @@ The following data can be stored:
   </tr>
   <tr><td>rmd:RecommendedFrames</td><td>Bag of FrameStruct</td><td>yes</td>
     <td>A list of recommended crop regions for different output sizes</td>
+  </tr>
 </table>
 
 ### AllowedDerivates
@@ -97,9 +99,9 @@ This structure represents an area. Similar to Dimensions (stDim) the “unit” 
 
 <table>
   <tr><th>Type</th><th>Definition></th></tr>
-  <tr><td>Point</td><td>Single point at stArea:x, stArea:y</td>
+  <tr><td>Point</td><td>Single point at stArea:x, stArea:y</td></tr>
   <tr><td>Circle</td><td>Center at stArea:x, stArea:y with diameter stArea:d</td></tr>
-  <tr><td>Rectangle</td><td>Center at stArea:x, stArea:y with bounds stArea:w, stArea:h</td>
+  <tr><td>Rectangle</td><td>Center at stArea:x, stArea:y with bounds stArea:w, stArea:h</td></tr>
 </table>
 
 The field namespace URI is http://ns.adobe.com/xmp/sType/Area#

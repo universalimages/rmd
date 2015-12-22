@@ -3,7 +3,7 @@ Responsive Metadata XMP standard
 
 This standard should cover all required data needed to dynamically crop
 and scale images for different output devices. The main use case is responsive
-websites.
+websites. Have a look at the [example implementation](./example.xml).
 
 The preferred prefix is *rmd*.
 
@@ -42,6 +42,14 @@ The following data can be stored:
   </tr>
   <tr><td>rmd:RecommendedFrames</td><td>Bag of FrameStruct</td><td>yes</td>
     <td>A list of recommended crop regions for different output sizes</td>
+  </tr>
+  <tr><td>rmd:Interpolation</td><td>Closed Choice</td><td>yes</td>
+    <td>Specifies how intermediate sizes should be treated. The following values are allowed:<br>
+    <dl>
+      <dt>linear</dt><dd>Cropping can happen between markers</dd>
+      <dt>step</dt><dd>Cropping only on markers</dd>
+    </dl>
+    </td>
   </tr>
 </table>
 

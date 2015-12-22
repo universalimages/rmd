@@ -47,6 +47,9 @@
                 </rdf:li>
               </rdf:Bag>
             </rmd:RecommendedFrames>
+
+            <rmd:Interpolation>step</rmd:Interpolation>
+
           </rmd:Responsiveness>
       </rdf:Description>
 

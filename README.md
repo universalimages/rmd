@@ -1,5 +1,5 @@
-Responsive Metadata XMP standard
-================================
+Responsive Metadata XMP standard (First Draft)
+==============================================
 
 This standard should cover all required data needed to dynamically crop
 and scale images for different output devices. The main use case is responsive
@@ -31,6 +31,9 @@ The following data can be stored:
   <tr><td>rmd:AllowedDerivates</td><td>Bag of AllowedDerivates</td><td>yes</td>
     <td>Lists the allowed operations.</td>
   </tr>
+  <tr><td>rmd:PivotPoint</td><td>XMP Area Point</td><td>yes</td>
+    <td>All dynamic crop operations should be relative to this point.</td>
+  </tr>
   <tr><td>rmd:CropArea</td><td>XMP Area Rectangle</td><td>yes</td>
     <td>Specifies the outer limits of the visible area. The outer area is considered the bleed. If this tag is present, the image should be cropped to those values. The outer part should only be used if the target aspect ratio differs from the source aspect ratio.</td>
   </tr>
@@ -53,7 +56,12 @@ The following data can be stored:
   </tr>
 </table>
 
+### Rules
+- PivotPoint has to be within SafeArea and CropArea (if defined).
+- SafeArea has to be within CropArea and all RecommendedFrames.
+
 ### AllowedDerivates
+Currently there is only one rule:
 <table>
   <tr><th>Field Name</th><th>Value Type</th><th>Description</th></tr>
   <tr><td>rmd:Crop</td><td>Closed Choice</td>
@@ -128,4 +136,24 @@ The preferred field namespace prefix is `stArea`.
   <tr><td>￼stArea:unit</td>￼<td>Open Choice</td>
   ￼<td>In the context of this document, only “normalized” is being specified for handling image regions.
   However, for compatibility with the XMP specification and future extensibility, the list will be kept open so that absolute coordinates could be added later-on.</td></tr>
+</table>
+
+## Compatibility with other standards
+The RMD standard brings all information needed for responsive images into one namespace. It's possible that some information is already stored in different places. The following table specifies how existing metadata should be treated.
+
+<table>
+  <tr><th>Field Name</th><th>Action</th></tr>
+  <tr>
+    <td>SubjectArea</td>
+    <td>If SubjectArea is a Point type, the value should be used as a placeholder value for rmd:PivotPoint. If it is a Rectangle type, it should be used as a placeholder for rmd:SafeArea.</td>
+  </tr>
+  <tr>
+    <td>SubjectLocation</td>
+    <td>If SubjectLocation is specified and SubjectArea is not a Point type, then SubjectLocation should be used as a placeholder value for rmd:PivotPoint.</td>
+  </tr>
+  <tr>
+    <td>XMP-cc:License</td>
+    <td>If the image contains a popular restrictive license such as the Creative Commons NC license, rmd:AllowedDerivates shall be set to false.
+    </td>
+  </tr>
 </table>

@@ -26,12 +26,17 @@
             </rmd:AllowedDerivates>
 
             <rmd:SafeArea rdf:parseType="Resource">
-              <stArea:x>0.33</stArea:x>
-              <stArea:y>0.66</stArea:y>
+              <stArea:x>0.3</stArea:x>
+              <stArea:y>0.6</stArea:y>
               <stArea:h>0.5</stArea:h>
               <stArea:w>0.5</stArea:w>
               <stArea:unit>normalized</stArea:unit>
             </rmd:SafeArea>
+
+            <rmd:PivotPoint rdf:parseType="Resource">
+              <stArea:x>0.38</stArea:x>
+              <stArea:y>0.66</stArea:y>
+            </rmd:PivotPoint>  
 
             <rmd:MinWidth>360</rmd:MinWidth>
 

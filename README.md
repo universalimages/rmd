@@ -41,13 +41,13 @@ The following data can be stored:
     <td>An area that cannot be cropped into. This area holds the relevant information within the image.</td>
   </tr>
   <tr><td>rmd:MinWidth</td><td>real</td><td>yes</td>
-    <td>The minimal viewport width (dp) required to show the full image. If the width is smaller, the image can be cropped.</td>
+    <td>The minimal width of the element (dp) required to show the full image. If the width is smaller, the image can be cropped.</td>
   </tr>
   <tr><td>rmd:RecommendedFrames</td><td>Bag of FrameStruct</td><td>yes</td>
     <td>A list of recommended crop regions for different output sizes</td>
   </tr>
   <tr><td>rmd:Interpolation</td><td>Closed Choice</td><td>yes</td>
-    <td>Specifies how intermediate sizes should be treated. The following values are allowed:<br>
+    <td>Specifies how intermediate sizes should be treated. The following values are allowed:<br/>
     <dl>
       <dt>linear</dt><dd>Cropping can happen between markers</dd>
       <dt>step</dt><dd>Cropping only on markers</dd>
@@ -65,8 +65,7 @@ Currently there is only one rule:
 <table>
   <tr><th>Field Name</th><th>Value Type</th><th>Description</th></tr>
   <tr><td>rmd:Crop</td><td>Closed Choice</td>
-    <td>This attribute controls the level of modification allowed by the license restrictions of the image.<br>
-
+    <td>This attribute controls the level of modification allowed by the license restrictions of the image.<br />
     The following values are allowed:
     <dl>
       <dt>none</dt><dd>No cropping allowed at all.</dd>

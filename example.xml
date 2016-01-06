@@ -1,4 +1,4 @@
-<?xpacket begin="?" id="W5M0MpCehiHzreSzNTczkc9d"?>
+<?xpacket begin="" id="W5M0MpCehiHzreSzNTczkc9d"?>
 <x:xmpmeta xmlns:x="adobe:ns:meta/" x:xmptk="Adobe XMP Core 5.4-c002 1.000000, 0000/00/00-00:00:00">
    <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
       <rdf:Description rdf:about=""
@@ -9,8 +9,6 @@
           xmlns:rmd="http://universalimages.github.io/rmd/"
           xmlns:stDim="http://ns.adobe.com/xap/1.0/sType/Dimensions#"
           xmlns:stArea="http://ns.adobe.com/xmp/sType/Area#">
-          <rmd:Responsiveness rdf:parseType="Resource">
-
             <rmd:AppliedToDimensions rdf:parseType="Resource">
                <stDim:w>912</stDim:w>
                <stDim:h>687</stDim:h>
@@ -36,7 +34,7 @@
             <rmd:PivotPoint rdf:parseType="Resource">
               <stArea:x>0.38</stArea:x>
               <stArea:y>0.66</stArea:y>
-            </rmd:PivotPoint>  
+            </rmd:PivotPoint>
 
             <rmd:MinWidth>360</rmd:MinWidth>
 
@@ -50,12 +48,11 @@
                   <stArea:unit>normalized</stArea:unit>
                   <rmd:MaxWidth>360</rmd:MaxWidth>
                 </rdf:li>
+                <!-- More li elements would go here. -->
               </rdf:Bag>
             </rmd:RecommendedFrames>
 
             <rmd:Interpolation>step</rmd:Interpolation>
-
-          </rmd:Responsiveness>
       </rdf:Description>
 
       <rdf:Description rdf:about=""

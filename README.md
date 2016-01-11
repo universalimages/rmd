@@ -3,7 +3,7 @@ Responsive Metadata XMP standard (First Draft)
 
 This standard should cover all required data needed to dynamically crop
 and scale images for different output devices. The main use case is responsive
-websites. Have a look at the [example implementation](./example.xmp).
+websites. Have a look at the [example implementation](./example.xml).
 
 The preferred prefix is *rmd*.
 

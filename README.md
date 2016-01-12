@@ -144,7 +144,6 @@ The preferred field namespace prefix is `stArea`.
   <td>Y coordinate of the center of the area (point, circle, rectangle)</td></tr>
   <tr><td>stArea:w</td><td>Real</td><td>Width of the area (rectangle)</td></tr>
   <tr><td>stArea:h</td><td>Real</td><td>Height of the area (rectangle)</td></tr>
-  <tr><td>stArea:d</td><td>Real</td><td>Diameter of area (circle)</td></tr>
   <tr><td>￼stArea:unit</td>￼<td>Open Choice</td>
   ￼<td>In the context of this document, only “normalized” is being specified for handling image regions.
   However, for compatibility with the XMP specification and future extensibility, the list will be kept open so that absolute coordinates could be added later-on.</td></tr>

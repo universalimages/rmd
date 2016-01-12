@@ -39,8 +39,8 @@
                 <rdf:li rdf:parseType="Resource">
                   <stArea:x>0.5</stArea:x>
                   <stArea:y>0.6</stArea:y>
-                  <stArea:h>0.8</stArea:h>
                   <stArea:w>0.8</stArea:w>
+                  <stArea:h>0.8</stArea:h>
                   <stArea:unit>normalized</stArea:unit>
                   <rmd:MaxWidth>360</rmd:MaxWidth>
                 </rdf:li>

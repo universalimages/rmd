@@ -20,7 +20,7 @@ The following data can be stored:
   <tr><td>rmd:AppliedToDimensions</td><td>Dimensions</td><td>no</td>
     <td>Width and height of the image (px) at the time of processing when storing responsive metadata.</td>
   </tr>
-  <tr><td>rmd:AllowedDerivates</td><td>Bag of AllowedDerivates</td><td>yes</td>
+  <tr><td>rmd:AllowedDerivates</td><td>AllowedDerivates</td><td>yes</td>
     <td>Lists the allowed operations.</td>
   </tr>
   <tr><td>rmd:PivotPoint</td><td>XMP Area Point</td><td>yes</td>
@@ -100,12 +100,33 @@ Either MaxWidth or theAspectRatio fields must be specified for a frame to be con
 
 ## Value Types
 
+### XMP Dimension
+The field namespace URI is http://ns.adobe.com/xap/1.0/sType/Dimensions# and the prefix is `stDim`.
+<table>
+  <tr><th>Field Name</th><th>Value Type</th><th>Description</th></tr>
+  <tr>
+    <td>stDim:w</td><td>Integer</td>
+    <td>Width of the image</td>
+  </tr>
+  <tr>
+    <td>stDim:h</td><td>Integer</td>
+    <td>Height of the image</td>
+  </tr>
+  <tr>
+    <td>stDim:unit</td><td>Closed Choice</td>
+    <td>Currently, `pixel` is the only allowed value.</td>
+  </tr>
+</table>
+
+Pixel refers to the actual pixel value of the image.
+
+
 ### XMP Area
 For reference, the XMP Area definition which is part of the XMP namespace is described here.
 This structure represents an area. Similar to Dimensions (stDim) the “unit” field describes the specific unit being used. This is based on the definition of Exif SubjectArea. The following table gives an overview of the different types and properties being used.
 
 <table>
-  <tr><th>Type</th><th>Definition></th></tr>
+  <tr><th>Type</th><th>Definition</th></tr>
   <tr><td>Point</td><td>Single point at stArea:x, stArea:y</td></tr>
   <tr><td>Circle</td><td>Center at stArea:x, stArea:y with diameter stArea:d</td></tr>
   <tr><td>Rectangle</td><td>Center at stArea:x, stArea:y with bounds stArea:w, stArea:h</td></tr>

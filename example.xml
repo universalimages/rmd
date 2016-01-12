@@ -15,12 +15,8 @@
                <stDim:unit>pixel</stDim:unit>
             </rmd:AppliedToDimensions>
 
-            <rmd:AllowedDerivates>
-              <rdf:Bag>
-                <rdf:li rdf:parseType="Resource">
-                  <rmd:Crop>all</rmd:Crop>
-                </rdf:li>
-              </rdf:Bag>
+            <rmd:AllowedDerivates rdf:parseType="Resource">
+              <rmd:Crop>all</rmd:Crop>
             </rmd:AllowedDerivates>
 
             <rmd:SafeArea rdf:parseType="Resource">

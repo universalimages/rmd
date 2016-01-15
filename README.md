@@ -5,9 +5,11 @@ This standard should cover all required data needed to dynamically crop
 and scale images for different output devices. The main use case is responsive
 websites. Have a look at the [example implementation](./example.xml).
 
-The preferred prefix is *rmd*.
 
-The following data can be stored:
+## namespace
+The namespace for this standard is `http://universalimages.github.io/rmd/0.1/`
+
+The preferred prefix is *rmd*.
 
 ## Representation
 
@@ -26,14 +28,14 @@ The following data can be stored:
   <tr><td>rmd:PivotPoint</td><td>XMP Area Point</td><td>yes</td>
     <td>All dynamic crop operations should be relative to this point.</td>
   </tr>
-  <tr><td>rmd:CropArea</td><td>XMP Area Rectangle</td><td>yes</td>
-    <td>Specifies the outer limits of the visible area. The outer area is considered the bleed. If this tag is present, the image should be cropped to those values. The outer part should only be used if the target aspect ratio differs from the source aspect ratio.</td>
+  <tr><td>rmd:CropArea</td><td>FrameStruct</td><td>yes</td>
+    <td>Specifies the outer limits of the visible area. The outer area is considered the bleed. If this tag contains area information, the image should be cropped to those values otherwise the full image is used. The outer part (bleed) should only be used if the target aspect ratio differs from the source aspect ratio.<br>
+    The `rmd:MinWidth` tag should be set so that it is clear when to start cropping. This is the only allowed tag apart from the `stArea` tags.</td>
   </tr>
-  <tr><td>rmd:SafeArea</td><td>XMP Area Rectangle</td><td>yes</td>
-    <td>An area that cannot be cropped into. This area holds the relevant information within the image.</td>
-  </tr>
-  <tr><td>rmd:MinWidth</td><td>real</td><td>yes</td>
-    <td>The minimal width of the element (dp) required to show the full image. If the width is smaller, the image can be cropped.</td>
+  <tr><td>rmd:SafeArea</td><td>FrameStruct</td><td>yes</td>
+    <td>An area that cannot be cropped into. This area holds the relevant information within the image.<br>
+    The `rmd:MaxWidth` tag should be used to define at which point this region should be used. This is the only allowed tag apart from the `stArea` tags.
+    </td>
   </tr>
   <tr><td>rmd:RecommendedFrames</td><td>Bag of FrameStruct</td><td>yes</td>
     <td>A list of recommended crop regions for different output sizes</td>
@@ -51,6 +53,17 @@ The following data can be stored:
 ### Rules
 - PivotPoint has to be within SafeArea and CropArea (if defined).
 - SafeArea has to be within CropArea and all RecommendedFrames.
+
+The default behavior for cropping should be the following:<br>
+- If the container element is larger or equal to the CropArea (or the width of the image), then the image must not be cropped.
+- If the container element is smaller or equal to the `MaxWidth` value of the SafeArea, then the image must be cropped to the safe area only.
+- If the container size is in between the two, then the behavior depends on the `Interpolation` field. If it is set to `linear` and the `MaxWidth` is set on the `SafeArea` tag, then the target width can be calculated with the formula:
+
+    CropArea:MaxWidth + ((Image width - CropArea:w) / (Image width - CropArea:MaxWidth)) * Element Width.
+
+ If the `Interpolation` is set to `step`, then the closest matching recommended crop should be chosen.
+
+All values have to be normalized to dp for the calculations.
 
 ### AllowedDerivates
 Currently there is only one rule:
@@ -71,26 +84,36 @@ Currently there is only one rule:
 </table>
 
 ### FrameStruct
-Extends XMP Rectangle Area (Requires stArea:x, stArea:y, stArea:w, stArea:h, see below)
+Extends XMP Rectangle Area. The Fields are using the `stArea` and `rmd` namespaces.
+
 <table>
-<tr><th>Field Name</th><th>Value Type</th>
-  <th>Optional</th><th>Description</th>
-</tr>
-<tr><td>rmd:MinAspectRatio</td><td>real</td><td>yes</td>
+  <tr><th>Field Name</th><th>Value Type</th>
+  <th>Optional</th><th>Description</th></tr>
+  <tr><td>stArea:x</td><td>Real</td><td>no<sup>1</sup></td>
+  <td>X coordinate of the center of the area (point, circle, rectangle)</td></tr>
+  <tr><td>stArea:y</td><td>Real</td><td>no<sup>1</sup></td>
+  <td>Y coordinate of the center of the area (point, circle, rectangle)</td></tr>
+  <tr><td>stArea:w</td><td>Real</td><td>no<sup>1</sup></td><td>Width of the area (rectangle)</td></tr>
+  <tr><td>stArea:h</td><td>Real</td><td>no<sup>1</sup></td><td>Height of the area (rectangle)</td></tr>
+  <tr><td>￼stArea:unit</td>￼<td>Closed Choice</td><td>no</td>
+  ￼<td>In the context of this document, only “normalized” is being specified for handling image regions.</td></tr>
+
+<tr><td>rmd:MinAspectRatio</td><td>real</td><td>yes<sup>2</sup></td>
   <td>Allows to specify the minimum aspect ratio for which this region can be used.</td>
 </tr>
-<tr><td>rmd:MaxAspectRatio</td><td>real</td><td>yes</td>
+<tr><td>rmd:MaxAspectRatio</td><td>real</td><td>yes<sup>2</sup></td>
   <td>Allows to specify the maximum aspect ratio for which this region can be used.</td>
 </tr>
 <tr><td>rmd:MinWidth</td><td>real</td><td>yes</td>
-  <td>Allows to set a minimum with (in dp) for this region.</td>
+  <td>Allows to set a minimum with (in dp) for this region to be considered.</td>
 </tr>
-<tr><td>rmd:MaxWidth</td><td>real</td><td>yes</td>
+<tr><td>rmd:MaxWidth</td><td>real</td><td>yes<sup>2</sup></td>
   <td>Allows to set a maximum with (in dp) for this region.</td>
 </tr>
 </table>
 
-Either MaxWidth or theAspectRatio fields must be specified for a frame to be considered.
+<sup>1</sup>The Area fields are optional for the Default Crop Area.<br>
+<sup>2</sup>Either MaxWidth or theAspectRatio fields must be specified for a frame to be considered.
 
 ## Units
   - Pixel (px): A single pixel of an image file.
@@ -135,19 +158,6 @@ This structure represents an area. Similar to Dimensions (stDim) the “unit” 
 The field namespace URI is http://ns.adobe.com/xmp/sType/Area#
 
 The preferred field namespace prefix is `stArea`.
-
-<table>
-  <tr><th>Field Name</th><th>Value Type</th><th>Description</th></tr>
-  <tr><td>stArea:x</td><td>Real</td>
-  <td>X coordinate of the center of the area (point, circle, rectangle)</td></tr>
-  <tr><td>stArea:y</td><td>Real</td>
-  <td>Y coordinate of the center of the area (point, circle, rectangle)</td></tr>
-  <tr><td>stArea:w</td><td>Real</td><td>Width of the area (rectangle)</td></tr>
-  <tr><td>stArea:h</td><td>Real</td><td>Height of the area (rectangle)</td></tr>
-  <tr><td>￼stArea:unit</td>￼<td>Open Choice</td>
-  ￼<td>In the context of this document, only “normalized” is being specified for handling image regions.
-  However, for compatibility with the XMP specification and future extensibility, the list will be kept open so that absolute coordinates could be added later-on.</td></tr>
-</table>
 
 ## Compatibility with other standards
 The RMD standard brings all information needed for responsive images into one namespace. It's possible that some information is already stored in different places. The following table specifies how existing metadata should be treated.

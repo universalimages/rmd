@@ -6,7 +6,7 @@
          <xmp:CreatorTool>Lightroom</xmp:CreatorTool>
       </rdf:Description>
       <rdf:Description rdf:about=""
-          xmlns:rmd="http://universalimages.github.io/rmd/"
+          xmlns:rmd="http://universalimages.github.io/rmd/0.1/"
           xmlns:stDim="http://ns.adobe.com/xap/1.0/sType/Dimensions#"
           xmlns:stArea="http://ns.adobe.com/xmp/sType/Area#">
             <rmd:AppliedToDimensions rdf:parseType="Resource">
@@ -25,6 +25,7 @@
               <stArea:h>0.5</stArea:h>
               <stArea:w>0.5</stArea:w>
               <stArea:unit>normalized</stArea:unit>
+              <rmd:MaxWidth>320</rmd:MaxWidth>
             </rmd:SafeArea>
 
             <rmd:PivotPoint rdf:parseType="Resource">
@@ -32,7 +33,9 @@
               <stArea:y>0.66</stArea:y>
             </rmd:PivotPoint>
 
-            <rmd:MinWidth>360</rmd:MinWidth>
+            <rmd:CropArea rdf:parseType="Resource">
+              <rmd:MinWidth>480</rmd:MinWidth>
+            </rmd:CropArea>
 
             <rmd:RecommendedFrames>
               <rdf:Bag>

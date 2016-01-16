@@ -87,39 +87,41 @@ Currently there is only one rule:
 Extends XMP Rectangle Area. The Fields are using the `stArea` and `rmd` namespaces.
 
 <table>
-  <tr><th>Field Name</th><th>Value Type</th>
+  <tr><th>Field Name</th><th>Value Type (Unit)</th>
   <th>Optional</th><th>Description</th></tr>
-  <tr><td>stArea:x</td><td>Real</td><td>no<sup>1</sup></td>
-  <td>X coordinate of the center of the area (point, circle, rectangle)</td></tr>
-  <tr><td>stArea:y</td><td>Real</td><td>no<sup>1</sup></td>
-  <td>Y coordinate of the center of the area (point, circle, rectangle)</td></tr>
-  <tr><td>stArea:w</td><td>Real</td><td>no<sup>1</sup></td><td>Width of the area (rectangle)</td></tr>
-  <tr><td>stArea:h</td><td>Real</td><td>no<sup>1</sup></td><td>Height of the area (rectangle)</td></tr>
-  <tr><td>￼stArea:unit</td>￼<td>Closed Choice</td><td>no</td>
-  ￼<td>In the context of this document, only “normalized” is being specified for handling image regions.</td></tr>
+  <tr><td>stArea:x</td><td>Real (relative)</td><td>no<sup>1</sup></td>
+  <td>X coordinate of the center of the area (point, rectangle)</td></tr>
+  <tr><td>stArea:y</td><td>Real (relative)</td><td>no<sup>1</sup></td>
+  <td>Y coordinate of the center of the area (point, rectangle)</td></tr>
+  <tr><td>stArea:w</td><td>Real (relative)</td><td>no<sup>1</sup></td><td>Width of the area (rectangle)</td></tr>
+  <tr><td>stArea:h</td><td>Real (relative)</td><td>no<sup>1</sup></td><td>Height of the area (rectangle)</td></tr>
 
-<tr><td>rmd:MinAspectRatio</td><td>real</td><td>yes<sup>2</sup></td>
+<tr><td>rmd:MinAspectRatio</td><td>Real (dp)</td><td>yes<sup>2</sup></td>
   <td>Allows to specify the minimum aspect ratio for which this region can be used.</td>
 </tr>
-<tr><td>rmd:MaxAspectRatio</td><td>real</td><td>yes<sup>2</sup></td>
+<tr><td>rmd:MaxAspectRatio</td><td>Real (dp)</td><td>yes<sup>2</sup></td>
   <td>Allows to specify the maximum aspect ratio for which this region can be used.</td>
 </tr>
-<tr><td>rmd:MinWidth</td><td>real</td><td>yes</td>
+<tr><td>rmd:MinWidth</td><td>Real (dp)</td><td>yes</td>
   <td>Allows to set a minimum with (in dp) for this region to be considered.</td>
 </tr>
-<tr><td>rmd:MaxWidth</td><td>real</td><td>yes<sup>2</sup></td>
+<tr><td>rmd:MaxWidth</td><td>Real (dp)</td><td>yes<sup>2</sup></td>
   <td>Allows to set a maximum with (in dp) for this region.</td>
 </tr>
 </table>
 
 <sup>1</sup>The Area fields are optional for the Default Crop Area.<br>
-<sup>2</sup>Either MaxWidth or theAspectRatio fields must be specified for a frame to be considered.
+<sup>2</sup>Either MaxWidth or the AspectRatio fields must be specified for a frame to be considered.
+
+
 
 ## Units
   - Pixel (px): A single pixel of an image file.
   - Density independent Pixel (dp), aka CSS Pixel: This pixel is defined by a viewing angle and is independent of the physical medium. It is defined in the
   [CSS 2.1 spec](http://www.w3.org/TR/2011/REC-CSS2-20110607/syndata.html#length-units) and is around 12.8' or "the visual angle of one pixel on a device with a pixel density of 96dpi and a distance from the reader of an arm's length".
+  - Relative value: A real number between 0 and 1 whereas 1 stands for the full width or height of the media file.
 
+The point (0, 0) is the top left point relative to the raw image. (Before Exif rotation is applied.)
 
 ## Value Types
 
@@ -151,7 +153,6 @@ This structure represents an area. Similar to Dimensions (stDim) the “unit” 
 <table>
   <tr><th>Type</th><th>Definition</th></tr>
   <tr><td>Point</td><td>Single point at stArea:x, stArea:y</td></tr>
-  <tr><td>Circle</td><td>Center at stArea:x, stArea:y with diameter stArea:d</td></tr>
   <tr><td>Rectangle</td><td>Center at stArea:x, stArea:y with bounds stArea:w, stArea:h</td></tr>
 </table>
 

@@ -24,7 +24,6 @@
               <stArea:y>0.6</stArea:y>
               <stArea:h>0.5</stArea:h>
               <stArea:w>0.5</stArea:w>
-              <stArea:unit>normalized</stArea:unit>
               <rmd:MaxWidth>320</rmd:MaxWidth>
             </rmd:SafeArea>
 

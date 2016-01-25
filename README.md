@@ -20,7 +20,7 @@ The preferred prefix is *rmd*.
     <th>Optional</th><th>Description</th>
   </tr>
   <tr><td>rmd:AppliedToDimensions</td><td>Dimensions</td><td>no</td>
-    <td>Width and height of the image (px) at the time of processing when storing responsive metadata.</td>
+    <td>Width and height of the upright image (px) at the time of processing when storing responsive metadata.</td>
   </tr>
   <tr><td>rmd:AllowedDerivates</td><td>AllowedDerivates</td><td>yes</td>
     <td>Lists the allowed operations.</td>
@@ -121,7 +121,7 @@ Extends XMP Rectangle Area. The Fields are using the `stArea` and `rmd` namespac
   [CSS 2.1 spec](http://www.w3.org/TR/2011/REC-CSS2-20110607/syndata.html#length-units) and is around 12.8' or "the visual angle of one pixel on a device with a pixel density of 96dpi and a distance from the reader of an arm's length".
   - Relative value: A real number between 0 and 1 whereas 1 stands for the full width or height of the media file.
 
-The point (0, 0) is the top left point relative to the raw image. (Before Exif rotation is applied.)
+The point (0, 0) is the top left point relative to the **upright** image. (After Exif rotation is applied.)
 
 ## Value Types
 

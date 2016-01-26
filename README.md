@@ -73,7 +73,7 @@ Currently there is only one rule:
     <td>This attribute controls the level of modification allowed by the license restrictions of the image.<br />
     The following values are allowed:
     <dl>
-      <dt>none</dt><dd>No cropping allowed at all.</dd>
+      <dt>none</dt><dd>No cropping allowed at all.<sup>1</sup></dd>
       <dt>visibilityOnly</dt>
         <dd>This allows cropping only to prevent the visibility of details within an image. Editorial integrity needs to be prevented.</dd>
       <dt>all</dt>
@@ -82,6 +82,9 @@ Currently there is only one rule:
     </td>
   </tr>
 </table>
+
+<sup>1</sup> The `CropArea` rule must still be applied if it was set. But since there is no cropping allowed, it doesn't make any sense to set it in the first place.
+
 
 ### FrameStruct
 Extends XMP Rectangle Area. The Fields are using the `stArea` and `rmd` namespaces.

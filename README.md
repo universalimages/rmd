@@ -3,10 +3,10 @@ Responsive Metadata XMP standard (First Draft)
 
 This standard should cover all required data needed to dynamically crop
 and scale images for different output devices. The main use case is responsive
-websites. Have a look at the [example implementation](./example.xml).
+websites. Have a look at the [example xml](./example.xml).
 
 
-## namespace
+## Namespace
 The namespace for this standard is `http://universalimages.github.io/rmd/0.1/`
 
 The preferred prefix is *rmd*.
@@ -30,15 +30,15 @@ The preferred prefix is *rmd*.
   </tr>
   <tr><td>rmd:CropArea</td><td>FrameStruct</td><td>yes</td>
     <td>Specifies the outer limits of the visible area. The outer area is considered the bleed. If this tag contains area information, the image should be cropped to those values otherwise the full image is used. The outer part (bleed) should only be used if the target aspect ratio differs from the source aspect ratio.<br>
-    The `rmd:MinWidth` tag should be set so that it is clear when to start cropping. This is the only allowed tag apart from the `stArea` tags.</td>
+    The `rmd:MinWidth` tag must be set if interpolation is set to `linear` so that it is clear when to start cropping. This is the only allowed tag apart from the `stArea` tags.</td>
   </tr>
   <tr><td>rmd:SafeArea</td><td>FrameStruct</td><td>yes</td>
     <td>An area that cannot be cropped into. This area holds the relevant information within the image.<br>
-    The `rmd:MaxWidth` tag should be used to define at which point this region should be used. This is the only allowed tag apart from the `stArea` tags.
+    **The `rmd:MaxWidth` tag must be set to define at which point this region will be used. This is the only allowed tag apart from the `stArea` tags.
     </td>
   </tr>
   <tr><td>rmd:RecommendedFrames</td><td>Bag of FrameStruct</td><td>yes</td>
-    <td>A list of recommended crop regions for different output sizes</td>
+    <td>A list of recommended crop regions for different output sizes. Those are only considered if `Interpolation` is set to `step`.</td>
   </tr>
   <tr><td>rmd:Interpolation</td><td>Closed Choice</td><td>yes</td>
     <td>Specifies how intermediate sizes should be treated. The following values are allowed:<br/>
@@ -51,17 +51,16 @@ The preferred prefix is *rmd*.
 </table>
 
 ### Rules
-- PivotPoint has to be within SafeArea and CropArea (if defined).
-- SafeArea has to be within CropArea and all RecommendedFrames.
+- `PivotPoint` has to be within `SafeArea` and `CropArea` (if defined).
+- `SafeArea` has to be within `CropArea` and all `RecommendedFrames`.
 
 The default behavior for cropping should be the following:<br>
-- If the container element is larger or equal to the CropArea (or the width of the image), then the image must not be cropped.
-- If the container element is smaller or equal to the `MaxWidth` value of the SafeArea, then the image must be cropped to the safe area only.
-- If the container size is in between the two, then the behavior depends on the `Interpolation` field. If it is set to `linear` and the `MaxWidth` is set on the `SafeArea` tag, then the target width can be calculated with the formula:
+- If the container element is larger or equal to the `CropArea` (or the width of the image), then the image must not be cropped.
+- If the container element is smaller or equal to the `MaxWidth` value of the `SafeArea`, then the image must be cropped to the safe area only.
+- If the `SafeArea` is not defined, then only one axis will be cropped (past the crop defined by the `CropArea`).
+- If the container size is in between the two, then the behavior depends on the `Interpolation` field. If it is set to `linear` and the `MaxWidth` is set on the `SafeArea` tag, then the target width must be in between the `SafeArea` and the `CropArea`.
 
-    CropArea:MaxWidth + ((Image width - CropArea:w) / (Image width - CropArea:MaxWidth)) * Element Width.
-
- If the `Interpolation` is set to `step`, then the closest matching recommended crop should be chosen.
+ If the `Interpolation` is set to `step`, then the closest matching recommended crop should be chosen. If it is not defined, then `step` should be assumed.
 
 All values have to be normalized to dp for the calculations.
 
@@ -75,7 +74,7 @@ Currently there is only one rule:
     <dl>
       <dt>none</dt><dd>No cropping allowed at all.<sup>1</sup></dd>
       <dt>visibilityOnly</dt>
-        <dd>This allows cropping only to prevent the visibility of details within an image. Editorial integrity needs to be prevented.</dd>
+        <dd>This allows cropping only to prevent the visibility of details within an image. Editorial integrity must not be compromised.</dd>
       <dt>all</dt>
         <dd>This allows cropping for layout purposes as well.</dd>
     </dl>
@@ -182,3 +181,13 @@ The RMD standard brings all information needed for responsive images into one na
     </td>
   </tr>
 </table>
+
+## Prototype Implementations
+### Adding metadata to an image
+- [Adobe Metadata UI Extension](https://github.com/universalimages/rmd-extension): Allows editing the XMP metadata using the 'File Info' dialog in Adobe Photshop.
+- [Universal Images Marker Plugin](https://www.adobeexchange.com): A Photoshop extension that allows the user to display and set the crop regions on the actual image.
+
+### Processing the metadata
+- [Universal Images Filter for Thumbor](https://github.com/sbaechler/thumbor-universalimages): A reference implementation in Python for a web service that can handle images with embedded responsive metadata.
+
+- [Thumbor Universal Image Prototype](https://github.com/sbaechler/thumbor-rmd-demo): The dependencies required to set up an image server running Thumbor and Thumbor-Universalimages.

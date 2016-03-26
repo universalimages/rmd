@@ -2,11 +2,31 @@
 <html>
 <head>
   <meta charset='utf-8'>
-  <title>Universal Images</title>
+  <title>Responsive Metadata XMP Standard</title>
+  <style type="text/css">
+    table {
+      display: block;
+      width: 100%;
+      border-collapse: collapse;
+      border-spacing: 0;
+    }
+    tr {
+      background-color: white;
+      border-top: 1px solid #ccc;
+    }
+    tr:nth-child(2n) {
+      background-color: #f8f8f8;
+    }
+    td, th {
+      padding: 6px 13px;
+      border: 1px solid #ddd;
+    }
+  </style>
+
   <script src='http://www.w3.org/Tools/respec/respec-w3c-common' async class='remove'></script>
   <script class='remove'>
     var respecConfig = {
-    shortName: "universalimages",
+    shortName: "rmd",
     specStatus: "FPWD",
     editors: [
         {
@@ -37,35 +57,333 @@
 <body>
   <section id='abstract'>
     <p>
-      This document describes...
+      This document describes a standard for storing metadata related to
+      art direction in responsive images. It is based on the [[!XMP]] standard which
+      is supported by most image formats and programming languages.
+    </p>
+    <p>
+      The author of an image can embed the rules for art direction directly into the image file. A web server that processes the image can then crop it
+      according to those rules. The [[html-picture-element]] can be used to request the matching version of the image from the server.
     </p>
   </section>
 
-  <section id='sotd'>
-    <p>
-      This document has status...
+  <section id='sotd'><!-- Status of this Document -->
+    <!-- Automatically filled out by ReSpec -->
+    <p>As a First Public Working Draft, this document is incomplete. The editors seek to illustrate the full scope of the best practices- albeit with the details missing at this stage. In particular, the examples for each best practice are largely incomplete. The editors intend to compile a much richer set of examples in the period leading up to publication of the next Working Draft. Feedback is requested on the scope of this document and the best practices herein. The editors are particularly keen for reviewers to cite examples that may be used to further illustrate these best practices.</p>
+    <p>The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL
+      NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED",  "MAY", and
+      "OPTIONAL" in this document are to be interpreted as described in
+      RFC 2119.
     </p>
   </section>
 
   <section class="informative">
     <h1>Introduction</h1>
     <p>
-      Once upon a time...
+      Art direction in the context of universal images means cropping and reframing an image in one or two dimensions depending on the context it is in.
     </p>
+    <p>Art directed responsive images start with the photographer. The current situation is that the person who uploads an image to a web server makes the decision how an image is cropped. Apart from the technical challenges there are also legal ones. In general, copyright prohibits to alter a work of art in any way, even cropping it (although the interpretation of this differs between countries). However, most image agencies allow it in their license agreements. Nevertheless, this is a factor that has to be taken into consideration when a server is supposed to automatically crop an image.
+    </p>
+  </section>
+  <section class="informative">
+    <h1>Audience</h1>
+    <p>The audience is professionals in the web publishing environment. The most important groups are described below.</p>
+    <section>
+      <h2>Image authors (aka photographers)</h2>
+      <p>The photographers as the authors of an image are the only persons that can decide how and if their image can be altered. This standard allows them to define the rules for the responsive behavior of their images themselves.</p>
+    </section>
+    <section>
+      <h2>Online editors</h2>
+      <p>They are the ones who publish images together with their editorial content. Up until now they specified a focus point within the image themselves, if the content management system allowed it.<br/>
+      With images that have responsive information embedded, this will not be necessary anymore.
+      </p>
+    </section>
+    <section>
+      <h2>Web developers</h2>
+      <p>When using stock images for responsive designs, developers have to make
+        sure that when resizing the browser window, important areas of the image are not cut off.<br>
+        With universal images the web framework takes care of correctly cropping the images.
+      </p>
+    </section>
   </section>
 
   <section>
-    <h1>Normative</h1>
-    <p>
-      You MUST do this...
-    </p>
-  </section>
+    <h1>Definition</h1>
+    <section>
+    <h2>Namespace</h2>
+      <p>The namespace for this standard is <samp>http://universalimages.github.io/rmd/0.1/</samp></p>
+      <p>The XML namespace prefix is <strong>rmd</strong></p>
+    </section>
+    <section>
+      <h2>Units</h2>
+      <dl>
+        <dt>Pixel (px)</dt>
+        <dd>A single pixel of an image file.</dd>
+        <dt>Display-independent pixel (dp), aka CSS Pixel</dt>
+        <dd>This pixel is defined by a viewing angle and is independent of the physical medium. It is defined in section 4.3.2 of [[!CSS2]]. It is around 12.8' or "the visual angle of one pixel on a device with a pixel density of 96dpi and a distance from the reader of an arm's length".
+        </dd>
+
+      <p>Absolute values are set in display-independent CSS pixels as defined in section 4.3.2 of [[!CSS2]]. In the following document the unit <dfn>dp</dfn> is used.</p>
+      <p>The only exception to the above is for the image dimensions, where the actual
+        pixel values are used. This is marked with the unit <dfn>px</dfn>.
+      <p>Relative values are between 0 and 1</p>
+      <p>
+        The point (0, 0) is the top left point relative to the <strong>upright</strong> image. (After Exif rotation has been applied.)
+      </p>
+    </section>
+  </section><!-- Definition -->
+
+  <section>
+    <h1>XML Schema</h1>
+    <section>
+      <h2>Attributes</h2>
+      <table>
+        <tr><th>Field Name</th><th>Value Type</th>
+          <th>Optional</th><th>Description</th>
+        </tr>
+        <tr><td>rmd:AppliedToDimensions</td><td>Dimensions</td><td>no</td>
+          <td>Width and height of the upright image (px) at the time of processing when storing responsive metadata.</td>
+        </tr>
+        <tr><td>rmd:AllowedDerivates</td><td>AllowedDerivates</td><td>yes</td>
+          <td>Lists the allowed operations.</td>
+        </tr>
+        <tr><td>rmd:PivotPoint</td><td>XMP Area Point</td><td>yes</td>
+          <td>All dynamic crop operations SHOULD be relative to this point.</td>
+        </tr>
+        <tr><td>rmd:CropArea</td><td>FrameStruct</td><td>yes</td>
+          <td>Specifies the outer limits of the visible area. The outer area is considered the bleed. If this tag contains area information, the image SHOULD be cropped to those values, otherwise the full image is used. The outer part (bleed) MAY only be used if the target aspect ratio differs from the source aspect ratio.<br>
+          The `rmd:MinWidth` tag MUST be set if interpolation is set to `linear` so that it is clear when to start cropping. This is the only allowed tag apart from the `stArea` tags.</td>
+        </tr>
+        <tr><td>rmd:SafeArea</td><td>FrameStruct</td><td>yes</td>
+          <td>An area that cannot be cropped into. This area holds the relevant information within the image.<br>
+          **The `rmd:MaxWidth` tag SHOULD be set to define at which point this region will be used. This is the only allowed tag apart from the `stArea` tags.
+          </td>
+        </tr>
+        <tr><td>rmd:RecommendedFrames</td><td>Bag of FrameStruct</td><td>yes</td>
+          <td>A list of recommended crop regions for different output sizes. Those MUST only be considered if `Interpolation` is set to `step`.</td>
+        </tr>
+        <tr><td>rmd:Interpolation</td><td>Closed Choice</td><td>yes</td>
+          <td>Specifies how intermediate sizes MUST be treated. The following values are allowed:<br/>
+          <dl>
+            <dt>linear</dt><dd>Cropping MAY happen between markers</dd>
+            <dt>step</dt><dd>Cropping SHOULD only happen on markers</dd>
+          </dl>
+          </td>
+        </tr>
+      </table>
+    </section>
+
+    <section>
+      <h2>Constraints</h3>
+      <ul>
+        <li>PivotPoint MUST be within the SafeArea and CropArea (if defined).</li>
+        <li>SafeArea MUST be within CropArea and all RecommendedFrames.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Value Types</h2>
+      <section>
+        <h3>Allowed Derivates</h2>
+        <p>Currently, there is only one rule:</p>
+
+        <table>
+          <tr><th>Field Name</th><th>Value Type</th><th>Description</th></tr>
+          <tr><td>rmd:Crop</td><td>Closed Choice</td>
+            <td>This attribute controls the level of modification allowed by the license restrictions of the image.<br />
+            The following values are allowed:
+            <dl>
+              <dt>none</dt><dd>The image MUST NOT be cropped at all.<sup>1</sup></dd>
+              <dt>visibilityOnly</dt>
+                <dd>Cropping MAY only be done to prevent the visibility of details within an image. Editorial integrity MUST NOT be compromised.</dd>
+              <dt>all</dt>
+                <dd>This allows cropping for layout purposes as well.</dd>
+            </dl>
+            </td>
+          </tr>
+        </table>
+        <p>
+        <sup>1</sup> The <code>CropArea</code> rule MUST still be applied if it was set.</p>
+      </section><!-- Allowed Derivates -->
+      <section>
+        <h3>Frame Struct</h3>
+        <p>Extends [[!XMP]] Area (Rectangle). The fields are using the
+          <code>stArea</code> and <code>rmd</code> namespaces.
+        </p>
+
+        <table>
+          <tr><th>Field Name</th><th>Value Type (Unit)</th>
+          <th>Optional</th><th>Description</th></tr>
+          <tr><td>stArea:x</td><td>Real (relative)</td><td>no<sup>1</sup></td>
+          <td>X coordinate of the center of the area (point, rectangle)</td></tr>
+          <tr><td>stArea:y</td><td>Real (relative)</td><td>no<sup>1</sup></td>
+          <td>Y coordinate of the center of the area (point, rectangle)</td></tr>
+          <tr><td>stArea:w</td><td>Real (relative)</td><td>no<sup>1</sup></td><td>Width of the area (rectangle)</td></tr>
+          <tr><td>stArea:h</td><td>Real (relative)</td><td>no<sup>1</sup></td><td>Height of the area (rectangle)</td></tr>
+
+          <tr><td>rmd:MinAspectRatio</td><td>Real (dp)</td><td>yes<sup>2</sup></td>
+            <td>A minimum aspect ratio MAY be set (in dp). For this frame to be considered the crop aspect ratio MUST be greater or equal.</td>
+          </tr>
+          <tr><td>rmd:MaxAspectRatio</td><td>Real (dp)</td><td>yes<sup>2</sup></td>
+            <td>A maximum aspect ratio MAY be set (in dp). For this frame to be considered the crop aspect ratio MUST be less or equal.</td>
+          </tr>
+          <tr><td>rmd:MinWidth</td><td>Real (dp)</td><td>yes</td>
+            <td>This value is OPTIONAL. If set, the crop with (in dp) MUST NOT be less for that frame to be considered.</td>
+          </tr>
+          <tr><td>rmd:MaxWidth</td><td>Real (dp)</td><td>yes<sup>2</sup></td>
+            <td>This value is OPTIONAL. If set, the crop with (in dp) MUST NOT be larger for that frame to be considered.</td>
+          </tr>
+        </table>
+        <p>
+          <sup>1</sup>The Area fields are OPTIONAL for the Default Crop Area.<br>
+          <sup>2</sup>Either MaxWidth or the AspectRatio fields MUST be specified for a frame to be considered.
+        </p>
+      </section>
+
+      <section>
+        <h3>Dimension</h3>
+        <p>
+          The field namespace URI is <code>http://ns.adobe.com/xap/1.0/sType/Dimensions#</code> and the prefix is
+          <code>stDim</code>.
+        </p>
+        <table>
+          <tr><th>Field Name</th><th>Value Type</th><th>Description</th></tr>
+          <tr>
+            <td>stDim:w</td><td>Integer</td>
+            <td>Width of the image</td>
+          </tr>
+          <tr>
+            <td>stDim:h</td><td>Integer</td>
+            <td>Height of the image</td>
+          </tr>
+          <tr>
+            <td>stDim:unit</td><td>Closed Choice</td>
+            <td>Currently, <em>pixel</em> is the only allowed value.</td>
+          </tr>
+        </table>
+      </section>
+      <section>
+        <h3>Area</h3>
+        <p>
+          For reference, the XMP Area definition which is part of the [[!XMP]] namespace is described here. This structure represents an area or a point. Similar to Dimensions (stDim) the “unit” field describes the specific unit being used. The following table gives an overview of the different types and properties being used.
+        </p>
+        <table>
+          <tr><th>Type</th><th>Definition</th></tr>
+          <tr><td>Point</td><td>Single point at stArea:x, stArea:y</td></tr>
+          <tr><td>Rectangle</td><td>Center at stArea:x, stArea:y with bounds stArea:w, stArea:h</td></tr>
+        </table>
+        <p>
+          The field namespace URI is <code>http://ns.adobe.com/xmp/sType/Area#</code><br/>
+          The field namespace prefix is <code>stArea</code>.
+        </p>
+      </section>
+    </section><!-- Value Types -->
+    <section>
+      <h2>Compatibility with other standards</h2>
+      <p>
+        The RMD standard brings all information needed for responsive images into one namespace. It's possible that some information is already stored in a different place. The following table specifies how existing metadata should be treated.
+      </p>
+      <table>
+        <tr><th>Field Name</th><th>Action</th></tr>
+        <tr>
+          <td>SubjectArea</td>
+          <td>If SubjectArea is a Point type, the value SHOULD be used as a placeholder value for rmd:PivotPoint. If it is a Rectangle type, it SHOULD be used as a placeholder for rmd:SafeArea.</td>
+        </tr>
+        <tr>
+          <td>SubjectLocation</td>
+          <td>If SubjectLocation is specified and SubjectArea is not a Point type, then SubjectLocation SHOULD be used as a placeholder value for rmd:PivotPoint.</td>
+        </tr>
+        <tr>
+          <td>XMP-cc:License</td>
+          <td>If the image contains a popular restrictive license such as the Creative Commons NC license, rmd:AllowedDerivates MUST be set to none.
+          </td>
+        </tr>
+      </table>
+    </section>
+
+  </section> <!-- XML Schema -->
+
+  <section>
+    <h1>Interpretation</h1>
+    <section>
+      <h2>Rules</h2>
+      <p>
+        The default behavior for cropping MUST follow these rules:
+        <ul>
+          <li>
+            If the container element is larger or equal to the CropArea (or the width of the image), then the image MUST NOT be cropped.
+          </li>
+          <li>
+            If the container element is smaller or equal to the MaxWidth value of the SafeArea, then the image MUST be cropped to the safe area only. This rule also applies if the calculated height is smaller than the height of the SafeArea.
+          </li>
+          <li>
+            If the SafeArea is not defined, then only one axis MAY be cropped (past the crop defined by the CropArea).
+          </li>
+          <li>
+            If the container size is in between the two, then the behavior depends on the Interpolation field. If it is set to linear and the MaxWidth is set on the SafeArea tag, then the target width MUST be in between the SafeArea and the CropArea. If the Interpolation is set to step, then the closest matching recommended crop MUST be chosen. If it is not defined, then step SHOULD be assumed.
+          </li>
+        </ul>
+        All values have to be normalized to dp for the calculations.
+      </p>
+    </section>
+    <section>
+      <h2>Process</h2>  
+      <p>
+        The recommended way to process the image is described in the
+        <a href="#activity-diagram">activity diagram</a> which is referenced in the appendix.
+      </p>
+    </section>
+
+
+
+  </section> <!-- Interpretation -->
 
   <section class="appendix">
     <h1>Appendix</h1>
-    <p>
-      By the way...
-    </p>
-  </section>
+    <section>
+      <h2>Use Cases</h2>
+      <p>The following is a collection of use cases where art direction is used:</p>
+      <ul>
+        <li><strong>Small devices</strong>: Smartphones, especially when held in portrait mode, simply cannot show an image the size the photographer has envisioned it. Sometimes details cannot be recognized in a small image due to their size. To keep up with &nbsp;editorial integrity, one has to find a balance between zooming in to show what is going on and&nbsp;the overall image composition.</li>
+        <li><strong>Different layouts</strong>: Websites could use the same image in different places. For each layout the image would be displayed in the size and aspect ratio required&nbsp;by the layout.</li>
+        <li><strong>Fluid images</strong>: Websites often use a fluid grid where the column with is relative to the browser width. If images have a fixed height and a dynamic width then parts of the image can get cropped in the browser.</li>
+        <li><strong>Adaptive images</strong>: Images can be displayed full screen on mobile devices no matter if the user is holding the device in portrait or landscape mode.</li>
+      </ul>
+    </section><!-- Use cases -->
+
+    <section>
+      <h2>Prototype Implementations</h2>
+      <section>
+        <h3>Adding Metadata to an Image</h3>
+        <ul>
+          <li><a href="https://github.com/universalimages/rmd-extension">Adobe Metadata UI Extension</a>: Allows editing the XMP metadata using the 'File Info' dialog in Adobe Photshop.</li>
+          <li><a href="https://www.adobeexchange.com">Universal Images Marker Plugin</a>: A Photoshop extension that allows the user to display and set the crop regions on the actual image.</li>
+        </ul>
+      </section>
+      <section>
+        <h3>Processing the metadata</h3>
+        <ul>
+          <li><p><a href="https://github.com/sbaechler/thumbor-universalimages">Universal Images Filter for Thumbor</a>: A reference implementation in Python for a web service that can handle images with embedded responsive metadata.</p></li>
+          <li><p><a href="https://github.com/sbaechler/thumbor-rmd-demo">Thumbor Universal Image Prototype</a>: The dependencies required to set up an image server running Thumbor and Thumbor-Universalimages.</p></li>
+        </ul>
+      </section>
+    </section>
+
+    <section>
+      <h2>Further Documentation</h2>
+      <p>
+        <ul>
+          <li>
+            <a href="https://github.com/universalimages/rmd/blob/master/example.xml">An example of the XMP containing responsive information.</a>
+          </li>
+          <li>
+            <a id="activity-diagram" href="https://github.com/sbaechler/thumbor-universalimages/blob/master/docs/uml/Activity-diagram-rmd.pdf">Activity diagram for interpreting the XMP metadata</a>.
+          </li>
+        </ul>
+
+      </p>
+    </section>
+
+  </section><!-- appendix -->
 </body>
 </html>

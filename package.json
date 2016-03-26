@@ -1,12 +1,14 @@
 {
   "name": "universalimages",
-  "descripton" : "Universal Images",
-  "author" : {
-    "name" : "Simon Bächler",
-    "url" : "https://github.com/universalimages/"
+  "descripton": "Universal Images",
+  "author": {
+    "name": "Simon Bächler",
+    "url": "https://github.com/universalimages/"
   },
-  "main" : "index.html",
-  "private" : "true",
+  "main": "index.html",
+  "private": "true",
   "version": "1.0.0",
-  "dependencies": {}
+  "devDependencies": {
+    "live-server": "^0.9.2"
+  }
 }

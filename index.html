@@ -21,6 +21,9 @@
       padding: 6px 13px;
       border: 1px solid #ddd;
     }
+    code {
+      color: #666 !important;
+    }
   </style>
 
   <script src='http://www.w3.org/Tools/respec/respec-w3c-common' async class='remove'></script>
@@ -80,9 +83,14 @@
   <section class="informative">
     <h1>Introduction</h1>
     <p>
-      Art direction in the context of universal images means cropping and reframing an image in one or two dimensions depending on the context it is in.
+      Art direction in the context of universal images means cropping and re-framing an image in one or two dimensions depending on the context it is in.
     </p>
-    <p>Art directed responsive images start with the photographer. The current situation is that the person who uploads an image to a web server makes the decision how an image is cropped. Apart from the technical challenges there are also legal ones. In general, copyright prohibits to alter a work of art in any way, even cropping it (although the interpretation of this differs between countries). However, most image agencies allow it in their license agreements. Nevertheless, this is a factor that has to be taken into consideration when a server is supposed to automatically crop an image.
+    <p>Art directed responsive images start with the photographer. The current situation is that the person who uploads an image to a web server usually  makes the decision how an image is cropped.
+    Apart from the technical challenges there are also legal ones. In general, copyright prohibits altering a work of art in any way, even cropping it. (The interpretation of this differs between countries).
+    However, most image agencies allow cropping an image in their license agreements. Nevertheless, this is a factor that has to be taken into consideration when a server is supposed to automatically crop an image.
+    </p>
+    <p>
+      The purpose of this standard is to give authors and copyright holders a possibility to define the responsive behavior of their images. For web developers and content editors it would simplify things when dealing with responsive issues. Images would always be framed correctly on every device and screen size.
     </p>
   </section>
   <section class="informative">
@@ -101,7 +109,7 @@
     <section>
       <h2>Web developers</h2>
       <p>When using stock images for responsive designs, developers have to make
-        sure that when resizing the browser window, important areas of the image are not cut off.<br>
+        sure that when re-sizing the browser window, important areas of the image are not cut off.<br>
         With universal images the web framework takes care of correctly cropping the images.
       </p>
     </section>
@@ -111,7 +119,9 @@
     <h1>Definition</h1>
     <section>
     <h2>Namespace</h2>
-      <p>The namespace for this standard is <samp>http://universalimages.github.io/rmd/0.1/</samp></p>
+      <p>The namespace for this standard is <code>http://universalimages.github.io/rmd/1.0/</code>. <br/>
+      The version is part of the URL. While the standard is still in the first draft phase, a version below 1.0 SHOULD be used. The prototype implementations are currently using version 0.1.
+      </p>
       <p>The XML namespace prefix is <strong>rmd</strong></p>
     </section>
     <section>
@@ -327,7 +337,7 @@
       </p>
     </section>
     <section>
-      <h2>Process</h2>  
+      <h2>Process</h2>
       <p>
         The recommended way to process the image is described in the
         <a href="#activity-diagram">activity diagram</a> which is referenced in the appendix.
@@ -385,5 +395,15 @@
     </section>
 
   </section><!-- appendix -->
+
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-46936819-3', 'auto');
+    ga('send', 'pageview');
+  </script>
 </body>
 </html>

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html>
-<head>
-  <meta charset='utf-8'>
+<html lang="en" dir="ltr" typeof="bibo:Document " prefix="bibo: http://purl.org/ontology/bibo/ w3p: http://www.w3.org/2001/02pd/rec54#">
+<head><meta lang="" property="dc:language" content="en">
+  <meta charset="utf-8">
   <title>Responsive Metadata XMP Standard</title>
   <style type="text/css">
     table {
@@ -26,62 +26,261 @@
     }
   </style>
 
-  <script src='http://www.w3.org/Tools/respec/respec-w3c-common' async class='remove'></script>
-  <script class='remove'>
-    var respecConfig = {
-    shortName: "rmd",
-    specStatus: "FPWD",
-    editors: [
+  <script async="" src="//www.google-analytics.com/analytics.js"></script>
+  <style>/*****************************************************************
+ * ReSpec 3 CSS
+ * Robin Berjon - http://berjon.com/
+ *****************************************************************/
+
+/* --- INLINES --- */
+em.rfc2119 { 
+    text-transform:     lowercase;
+    font-variant:       small-caps;
+    font-style:         normal;
+    color:              #900;
+}
+
+h1 acronym, h2 acronym, h3 acronym, h4 acronym, h5 acronym, h6 acronym, a acronym,
+h1 abbr, h2 abbr, h3 abbr, h4 abbr, h5 abbr, h6 abbr, a abbr {
+    border: none;
+}
+
+dfn {
+    font-weight:    bold;
+}
+
+a.internalDFN {
+    color:  inherit;
+    border-bottom:  1px solid #99c;
+    text-decoration:    none;
+}
+
+a.externalDFN {
+    color:  inherit;
+    border-bottom:  1px dotted #ccc;
+    text-decoration:    none;
+}
+
+a.bibref {
+    text-decoration:    none;
+}
+
+cite .bibref {
+    font-style: normal;
+}
+
+code {
+    color:  #C83500;
+}
+
+/* --- TOC --- */
+.toc a, .tof a {
+    text-decoration:    none;
+}
+
+a .secno, a .figno {
+    color:  #000;
+}
+
+ul.tof, ol.tof {
+    list-style: none outside none;
+}
+
+.caption {
+    margin-top: 0.5em;
+    font-style:   italic;
+}
+
+/* --- TABLE --- */
+table.simple {
+    border-spacing: 0;
+    border-collapse:    collapse;
+    border-bottom:  3px solid #005a9c;
+}
+
+.simple th {
+    background: #005a9c;
+    color:  #fff;
+    padding:    3px 5px;
+    text-align: left;
+}
+
+.simple th[scope="row"] {
+    background: inherit;
+    color:  inherit;
+    border-top: 1px solid #ddd;
+}
+
+.simple td {
+    padding:    3px 10px;
+    border-top: 1px solid #ddd;
+}
+
+.simple tr:nth-child(even) {
+    background: #f0f6ff;
+}
+
+/* --- DL --- */
+.section dd > p:first-child {
+    margin-top: 0;
+}
+
+.section dd > p:last-child {
+    margin-bottom: 0;
+}
+
+.section dd {
+    margin-bottom:  1em;
+}
+
+.section dl.attrs dd, .section dl.eldef dd {
+    margin-bottom:  0;
+}
+
+@media print {
+    .removeOnSave {
+        display: none;
+    }
+}
+</style><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><link rel="stylesheet" href="https://www.w3.org/StyleSheets/TR/2016/W3C-WD"><!--[if lt IE 9]><script src='https://www.w3.org/2008/site/js/html5shiv.js'></script><![endif]--><script id="initialUserConfig" type="application/json">{
+  "shortName": "rmd",
+  "specStatus": "FPWD",
+  "editors": [
+    {
+      "name": "Simon Bächler",
+      "mailto": "simon@stellanera.com",
+      "w3cid": "83524"
+    }
+  ],
+  "edDraftURI": "https://github.com/universalimages/rmd",
+  "otherLinks": [
+    {
+      "key": "Project Home",
+      "data": [
         {
-            name: "Simon Bächler",
-            mailto: "simon@stellanera.com",
-            w3cid: "83524"
-        }
-    ],
-    edDraftURI: "https://github.com/universalimages/rmd",
-    otherLinks: [{
-      key: "Project Home",
-      data: [
-        {
-          value: "W3C Community Group",
-          href: "https://www.w3.org/community/universalimages/"
+          "value": "W3C Community Group",
+          "href": "https://www.w3.org/community/universalimages/"
         },
         {
-          value: "Github Organization Page",
-          href: "https://github.com/universalimages/"
+          "value": "Github Organization Page",
+          "href": "https://github.com/universalimages/"
         }
       ]
-    }],
-    wg:           "Universal Images Community Group",
-    wgURI:        "https://www.w3.org/community/universalimages/",
-    wgPublicList: "public-universalimages",
-};
-  </script></head>
-<body>
-  <section id='abstract'>
+    }
+  ],
+  "wg": "Universal Images Community Group",
+  "wgURI": "https://www.w3.org/community/universalimages/",
+  "wgPublicList": "public-universalimages"
+}</script></head>
+<body class="h-entry toc-inline" role="document" id="respecDocument"><div class="head" role="contentinfo" id="respecHeader">
+  <p>
+            <a class="logo" href="http://www.w3.org/"><img width="72" height="48" src="https://www.w3.org/StyleSheets/TR/2016/logos/W3C" alt="W3C"></a>
+  </p>
+  <h1 class="title p-name" id="title" property="dcterms:title">Responsive Metadata XMP Standard</h1>
+  <h2 id="w3c-first-public-working-draft-17-april-2016"><abbr title="World Wide Web Consortium">W3C</abbr> First Public Working Draft <time property="dcterms:issued" class="dt-published" datetime="2016-04-17">17 April 2016</time></h2>
+  <dl>
+      <dt>This version:</dt>
+      <dd><a class="u-url" href="http://www.w3.org/TR/2016/WD-rmd-20160417/">http://www.w3.org/TR/2016/WD-rmd-20160417/</a></dd>
+      <dt>Latest published version:</dt>
+      <dd><a href="http://www.w3.org/TR/rmd/">http://www.w3.org/TR/rmd/</a></dd>
+      <dt>Latest editor's draft:</dt>
+      <dd><a href="https://github.com/universalimages/rmd">https://github.com/universalimages/rmd</a></dd>
+    <dt>Editor:</dt>
+    <dd class="p-author h-card vcard" property="bibo:editor" resource="_:editor0" data-editor-id="83524"><span property="rdf:first" typeof="foaf:Person"><span property="foaf:name" class="p-name fn">Simon Bächler</span>, <span class="ed_mailto"><a class="u-email email" property="foaf:mbox" href="mailto:simon@stellanera.com">simon@stellanera.com</a></span></span>
+<span property="rdf:rest" resource="rdf:nil"></span>
+</dd>
+
+          <dt>Project Home:</dt>
+                  <dd>
+                    <a href="https://www.w3.org/community/universalimages/">
+                      <abbr title="World Wide Web Consortium">W3C</abbr> Community Group
+                    </a>
+                  </dd>
+                  <dd>
+                    <a href="https://github.com/universalimages/">
+                      Github Organization Page
+                    </a>
+                  </dd>
+  </dl>
+      <p class="copyright">
+        <a href="http://www.w3.org/Consortium/Legal/ipr-notice#Copyright">Copyright</a> ©
+        2016
+        
+        <a href="http://www.w3.org/"><abbr title="World Wide Web Consortium">W3C</abbr></a><sup>®</sup>
+        (<a href="http://www.csail.mit.edu/"><abbr title="Massachusetts Institute of Technology">MIT</abbr></a>,
+        <a href="http://www.ercim.eu/"><abbr title="European Research Consortium for Informatics and Mathematics">ERCIM</abbr></a>,
+        <a href="http://www.keio.ac.jp/">Keio</a>, <a href="http://ev.buaa.edu.cn/">Beihang</a>). 
+        <abbr title="World Wide Web Consortium">W3C</abbr> <a href="http://www.w3.org/Consortium/Legal/ipr-notice#Legal_Disclaimer">liability</a>,
+        <a href="http://www.w3.org/Consortium/Legal/ipr-notice#W3C_Trademarks">trademark</a> and
+            <a rel="license" href="http://www.w3.org/Consortium/Legal/copyright-documents">document use</a>
+        rules apply.
+      </p>
+  <hr title="Separator for header">
+</div>
+  <section id="abstract" class="introductory" property="dc:abstract"><h2 id="h-abstract" resource="#h-abstract"><span property="xhv:role" resource="xhv:heading">Abstract</span></h2>
     <p>
       This document describes a standard for storing metadata related to
-      art direction in responsive images. It is based on the [[!XMP]] standard which
+      art direction in responsive images. It is based on the [<cite><a class="bibref" href="#bib-XMP">XMP</a></cite>] standard which
       is supported by most image formats and programming languages.
     </p>
     <p>
       The author of an image can embed the rules for art direction directly into the image file. A web server that processes the image can then crop it
-      according to those rules. The [[html-picture-element]] can be used to request the matching version of the image from the server.
+      according to those rules. The [<cite><a class="bibref" href="#bib-html-picture-element">html-picture-element</a></cite>] can be used to request the matching version of the image from the server.
     </p>
-  </section>
-
-  <section id='sotd'><!-- Status of this Document -->
+  </section><section id="sotd" class="introductory"><h2 id="h-sotd" resource="#h-sotd"><span property="xhv:role" resource="xhv:heading">Status of This Document</span></h2>
+        <p>
+          <em>This section describes the status of this document at the time of its publication. Other documents may supersede this document. A list of current <abbr title="World Wide Web Consortium">W3C</abbr> publications and the latest revision of this technical report can be found in the <a href="http://www.w3.org/TR/"><abbr title="World Wide Web Consortium">W3C</abbr> technical reports index</a> at http://www.w3.org/TR/.</em>
+        </p>
+          <!-- Status of this Document -->
     <!-- Automatically filled out by ReSpec -->
     <p>As a First Public Working Draft, this document is incomplete. The editors seek to illustrate the full scope of the best practices- albeit with the details missing at this stage. In particular, the examples for each best practice are largely incomplete. The editors intend to compile a much richer set of examples in the period leading up to publication of the next Working Draft. Feedback is requested on the scope of this document and the best practices herein. The editors are particularly keen for reviewers to cite examples that may be used to further illustrate these best practices.</p>
-    <p>The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL
-      NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED",  "MAY", and
-      "OPTIONAL" in this document are to be interpreted as described in
+    <p>The key words "<em class="rfc2119" title="MUST">MUST</em>", "<em class="rfc2119" title="MUST NOT">MUST NOT</em>", "<em class="rfc2119" title="REQUIRED">REQUIRED</em>", "<em class="rfc2119" title="SHALL">SHALL</em>", "<em class="rfc2119" title="SHALL NOT">SHALL NOT</em>", "<em class="rfc2119" title="SHOULD">SHOULD</em>", "<em class="rfc2119" title="SHOULD NOT">SHOULD NOT</em>", "<em class="rfc2119" title="RECOMMENDED">RECOMMENDED</em>",  "<em class="rfc2119" title="MAY">MAY</em>", and
+      "<em class="rfc2119" title="OPTIONAL">OPTIONAL</em>" in this document are to be interpreted as described in
       RFC 2119.
     </p>
-  </section>
+  
+          <p>
+            This document was published by the <a href="https://www.w3.org/community/universalimages/">Universal Images Community Group</a> as a First Public Working Draft.
+              This document is intended to become a <abbr title="World Wide Web Consortium">W3C</abbr> Recommendation.
+              If you wish to make comments regarding this document, please send them to
+              <a href="mailto:public-universalimages@w3.org">public-universalimages@w3.org</a>
+              (<a href="mailto:public-universalimages-request@w3.org?subject=subscribe">subscribe</a>,
+              <a href="http://lists.w3.org/Archives/Public/public-universalimages/">archives</a>).
+            
+              All comments are welcome.
+          </p>
+            <p>
+              Publication as a First Public Working Draft does not imply endorsement by the <abbr title="World Wide Web Consortium">W3C</abbr>
+              Membership. This is a draft document and may be updated, replaced or obsoleted by other
+              documents at any time. It is inappropriate to cite this document as other than work in
+              progress.
+            </p>
+          <p>
+              This document was produced by
+              a group
+               operating under the
+              <a id="sotd_patent" property="w3p:patentRules" href="http://www.w3.org/Consortium/Patent-Policy-20040205/">5 February 2004 <abbr title="World Wide Web Consortium">W3C</abbr> Patent
+              Policy</a>.
+                <abbr title="World Wide Web Consortium">W3C</abbr> maintains a <a href="" rel="disclosure">public list of any patent
+                disclosures</a>
+              made in connection with the deliverables of
+              the group; that page also includes
+              instructions for disclosing a patent. An individual who has actual knowledge of a patent
+              which the individual believes contains
+              <a href="http://www.w3.org/Consortium/Patent-Policy-20040205/#def-essential">Essential
+              Claim(s)</a> must disclose the information in accordance with
+              <a href="http://www.w3.org/Consortium/Patent-Policy-20040205/#sec-Disclosure">section
+              6 of the <abbr title="World Wide Web Consortium">W3C</abbr> Patent Policy</a>.
+          </p>
+            <p>This document is governed by the <a id="w3c_process_revision" href="http://www.w3.org/2015/Process-20150901/">1 September 2015 <abbr title="World Wide Web Consortium">W3C</abbr> Process Document</a>.
+            </p>
+          
+</section><nav id="toc"><h2 class="introductory" id="table-of-contents" resource="#table-of-contents"><span property="xhv:role" resource="xhv:heading">Table of Contents</span></h2><ul class="toc" role="directory"><li class="tocline"><a href="#introduction" class="tocxref"><span class="secno">1. </span>Introduction</a></li><li class="tocline"><a href="#audience" class="tocxref"><span class="secno">2. </span>Audience</a><ul class="toc"><li class="tocline"><a href="#image-authors-aka-photographers" class="tocxref"><span class="secno">2.1 </span>Image authors (aka photographers)</a></li><li class="tocline"><a href="#online-editors" class="tocxref"><span class="secno">2.2 </span>Online editors</a></li><li class="tocline"><a href="#web-developers" class="tocxref"><span class="secno">2.3 </span>Web developers</a></li></ul></li><li class="tocline"><a href="#definition" class="tocxref"><span class="secno">3. </span>Definition</a><ul class="toc"><li class="tocline"><a href="#namespace" class="tocxref"><span class="secno">3.1 </span>Namespace</a></li><li class="tocline"><a href="#units" class="tocxref"><span class="secno">3.2 </span>Units</a></li></ul></li><li class="tocline"><a href="#xml-schema" class="tocxref"><span class="secno">4. </span>XML Schema</a><ul class="toc"><li class="tocline"><a href="#attributes" class="tocxref"><span class="secno">4.1 </span>Attributes</a></li><li class="tocline"><a href="#constraints" class="tocxref"><span class="secno">4.2 </span>Constraints</a></li><li class="tocline"><a href="#value-types" class="tocxref"><span class="secno">4.3 </span>Value Types</a><ul class="toc"><li class="tocline"><a href="#allowed-derivates" class="tocxref"><span class="secno">4.3.1 </span>Allowed Derivates</a></li><li class="tocline"><a href="#frame-struct" class="tocxref"><span class="secno">4.3.2 </span>Frame Struct</a></li><li class="tocline"><a href="#dimension" class="tocxref"><span class="secno">4.3.3 </span>Dimension</a></li><li class="tocline"><a href="#area" class="tocxref"><span class="secno">4.3.4 </span>Area</a></li></ul></li><li class="tocline"><a href="#compatibility-with-other-standards" class="tocxref"><span class="secno">4.4 </span>Compatibility with other standards</a></li></ul></li><li class="tocline"><a href="#interpretation" class="tocxref"><span class="secno">5. </span>Interpretation</a><ul class="toc"><li class="tocline"><a href="#rules" class="tocxref"><span class="secno">5.1 </span>Rules</a></li><li class="tocline"><a href="#process" class="tocxref"><span class="secno">5.2 </span>Process</a></li></ul></li><li class="tocline"><a href="#appendix" class="tocxref"><span class="secno">A. </span>Appendix</a><ul class="toc"><li class="tocline"><a href="#use-cases" class="tocxref"><span class="secno">A.1 </span>Use Cases</a></li><li class="tocline"><a href="#prototype-implementations" class="tocxref"><span class="secno">A.2 </span>Prototype Implementations</a><ul class="toc"><li class="tocline"><a href="#adding-metadata-to-an-image" class="tocxref"><span class="secno">A.2.1 </span>Adding Metadata to an Image</a></li><li class="tocline"><a href="#processing-the-metadata" class="tocxref"><span class="secno">A.2.2 </span>Processing the metadata</a></li></ul></li><li class="tocline"><a href="#further-documentation" class="tocxref"><span class="secno">A.3 </span>Further Documentation</a></li></ul></li><li class="tocline"><a href="#references" class="tocxref"><span class="secno">B. </span>References</a><ul class="toc"><li class="tocline"><a href="#normative-references" class="tocxref"><span class="secno">B.1 </span>Normative references</a></li><li class="tocline"><a href="#informative-references" class="tocxref"><span class="secno">B.2 </span>Informative references</a></li></ul></li></ul></nav>
 
-  <section class="informative">
-    <h1>Introduction</h1>
+  
+
+  <section class="informative" id="introduction" typeof="bibo:Chapter" resource="#introduction" property="bibo:hasPart">
+    <!--OddPage--><h2 id="h-introduction" resource="#h-introduction"><span property="xhv:role" resource="xhv:heading"><span class="secno">1. </span>Introduction</span></h2><p><em>This section is non-normative.</em></p>
     <p>
       Art direction in the context of universal images means cropping and re-framing an image in one or two dimensions depending on the context it is in.
     </p>
@@ -93,21 +292,21 @@
       The purpose of this standard is to give authors and copyright holders a possibility to define the responsive behavior of their images. For web developers and content editors it would simplify things when dealing with responsive issues. Images would always be framed correctly on every device and screen size.
     </p>
   </section>
-  <section class="informative">
-    <h1>Audience</h1>
+  <section class="informative" id="audience" typeof="bibo:Chapter" resource="#audience" property="bibo:hasPart">
+    <!--OddPage--><h2 id="h-audience" resource="#h-audience"><span property="xhv:role" resource="xhv:heading"><span class="secno">2. </span>Audience</span></h2><p><em>This section is non-normative.</em></p>
     <p>The audience is professionals in the web publishing environment. The most important groups are described below.</p>
-    <section>
-      <h2>Image authors (aka photographers)</h2>
+    <section id="image-authors-aka-photographers" typeof="bibo:Chapter" resource="#image-authors-aka-photographers" property="bibo:hasPart">
+      <h3 id="h-image-authors-aka-photographers" resource="#h-image-authors-aka-photographers"><span property="xhv:role" resource="xhv:heading"><span class="secno">2.1 </span>Image authors (aka photographers)</span></h3>
       <p>The photographers as the authors of an image are the only persons that can decide how and if their image can be altered. This standard allows them to define the rules for the responsive behavior of their images themselves.</p>
     </section>
-    <section>
-      <h2>Online editors</h2>
-      <p>They are the ones who publish images together with their editorial content. Up until now they specified a focus point within the image themselves if the content management system allowed it.<br/>
+    <section id="online-editors" typeof="bibo:Chapter" resource="#online-editors" property="bibo:hasPart">
+      <h3 id="h-online-editors" resource="#h-online-editors"><span property="xhv:role" resource="xhv:heading"><span class="secno">2.2 </span>Online editors</span></h3>
+      <p>They are the ones who publish images together with their editorial content. Up until now they specified a focus point within the image themselves if the content management system allowed it.<br>
       With images that have responsive information embedded, this will not be necessary anymore.
       </p>
     </section>
-    <section>
-      <h2>Web developers</h2>
+    <section id="web-developers" typeof="bibo:Chapter" resource="#web-developers" property="bibo:hasPart">
+      <h3 id="h-web-developers" resource="#h-web-developers"><span property="xhv:role" resource="xhv:heading"><span class="secno">2.3 </span>Web developers</span></h3>
       <p>When using stock images for responsive designs, developers have to make
         sure that when re-sizing the browser window, important areas of the image are not cut off.<br>
         With universal images the web framework takes care of correctly cropping the images.
@@ -115,40 +314,40 @@
     </section>
   </section>
 
-  <section>
-    <h1>Definition</h1>
-    <section>
-    <h2>Namespace</h2>
-      <p>The namespace for this standard is <code>http://universalimages.github.io/rmd/&lt;version&gt;/</code>. <br/>
-      The version is part of the URL. While the standard is still in the first draft phase, a version below 1.0 MUST be used. The prototype implementations are currently using version 0.1.
+  <section id="definition" typeof="bibo:Chapter" resource="#definition" property="bibo:hasPart">
+    <!--OddPage--><h2 id="h-definition" resource="#h-definition"><span property="xhv:role" resource="xhv:heading"><span class="secno">3. </span>Definition</span></h2>
+    <section id="namespace" typeof="bibo:Chapter" resource="#namespace" property="bibo:hasPart">
+    <h3 id="h-namespace" resource="#h-namespace"><span property="xhv:role" resource="xhv:heading"><span class="secno">3.1 </span>Namespace</span></h3>
+      <p>The namespace for this standard is <code>http://universalimages.github.io/rmd/&lt;version&gt;/</code>. <br>
+      The version is part of the URL. While the standard is still in the first draft phase, a version below 1.0 <em class="rfc2119" title="MUST">MUST</em> be used. The prototype implementations are currently using version 0.1.
       </p>
       <p>The XML namespace prefix is <strong>rmd</strong></p>
     </section>
-    <section>
-      <h2>Units</h2>
+    <section id="units" typeof="bibo:Chapter" resource="#units" property="bibo:hasPart">
+      <h3 id="h-units" resource="#h-units"><span property="xhv:role" resource="xhv:heading"><span class="secno">3.2 </span>Units</span></h3>
       <dl>
         <dt>Pixel (px)</dt>
         <dd>A single pixel of an image file.</dd>
         <dt>Display-independent pixel (dp), aka CSS Pixel</dt>
-        <dd>This pixel is defined by a viewing angle and is independent of the physical medium. It is defined in section 4.3.2 of [[!CSS2]]. It is around 12.8' or "the visual angle of one pixel on a device with a pixel density of 96dpi and a distance from the reader of an arm's length".
+        <dd>This pixel is defined by a viewing angle and is independent of the physical medium. It is defined in section 4.3.2 of [<cite><a class="bibref" href="#bib-CSS2">CSS2</a></cite>]. It is around 12.8' or "the visual angle of one pixel on a device with a pixel density of 96dpi and a distance from the reader of an arm's length".
         </dd>
 
-      <p>In the following sections the abbreviation <dfn>dp</dfn> is used for CSS pixels to avoid confusion.</p>
+      <p>In the following sections the abbreviation <dfn data-dfn-type="dfn" id="dfn-dp">dp</dfn> is used for CSS pixels to avoid confusion.</p>
       <p>The only place where actual image pixel values are used is the
-        image dimensions field. In that case the unit uses the abbreviation <dfn>px</dfn>.
-      <p>Relative values are between 0.0 and 1.0</p>
+        image dimensions field. In that case the unit uses the abbreviation <dfn data-dfn-type="dfn" id="dfn-px">px</dfn>.
+      </p><p>Relative values are between 0.0 and 1.0</p>
       <p>
-        The point (0, 0) is the top left point relative to the <strong>upright</strong> image. After [[Exif]] rotation has been applied.
+        The point (0, 0) is the top left point relative to the <strong>upright</strong> image. After [<cite><a class="bibref" href="#bib-Exif">Exif</a></cite>] rotation has been applied.
       </p>
-    </section>
+    </dl></section>
   </section><!-- Definition -->
 
-  <section>
-    <h1>XML Schema</h1>
-    <section>
-      <h2>Attributes</h2>
+  <section id="xml-schema" typeof="bibo:Chapter" resource="#xml-schema" property="bibo:hasPart">
+    <!--OddPage--><h2 id="h-xml-schema" resource="#h-xml-schema"><span property="xhv:role" resource="xhv:heading"><span class="secno">4. </span>XML Schema</span></h2>
+    <section id="attributes" typeof="bibo:Chapter" resource="#attributes" property="bibo:hasPart">
+      <h3 id="h-attributes" resource="#h-attributes"><span property="xhv:role" resource="xhv:heading"><span class="secno">4.1 </span>Attributes</span></h3>
       <table>
-        <tr><th>Field Name</th><th>Value Type</th>
+        <tbody><tr><th>Field Name</th><th>Value Type</th>
           <th>Optional</th><th>Description</th>
         </tr>
         <tr><td>rmd:AppliedToDimensions</td><td>Dimensions</td><td>no</td>
@@ -158,71 +357,71 @@
           <td>Lists the allowed operations.</td>
         </tr>
         <tr><td>rmd:PivotPoint</td><td>XMP Area Point</td><td>yes</td>
-          <td>All dynamic crop operations MUST be relative to this point.</td>
+          <td>All dynamic crop operations <em class="rfc2119" title="MUST">MUST</em> be relative to this point.</td>
         </tr>
         <tr><td>rmd:CropArea</td><td>FrameStruct</td><td>yes</td>
-          <td>Specifies the outer limits of the visible area. The outer area is considered the bleed. If this tag contains area information, the image SHOULD be cropped to those values, otherwise the full image is used. The outer part (bleed) MAY only be used if the target aspect ratio differs from the source aspect ratio.<br>
-          The `rmd:MinWidth` tag MUST be set if interpolation is set to `linear` so it is clear when to start cropping. This is the only allowed tag apart from the `stArea` tags.</td>
+          <td>Specifies the outer limits of the visible area. The outer area is considered the bleed. If this tag contains area information, the image <em class="rfc2119" title="SHOULD">SHOULD</em> be cropped to those values, otherwise the full image is used. The outer part (bleed) <em class="rfc2119" title="MAY">MAY</em> only be used if the target aspect ratio differs from the source aspect ratio.<br>
+          The `rmd:MinWidth` tag <em class="rfc2119" title="MUST">MUST</em> be set if interpolation is set to `linear` so it is clear when to start cropping. This is the only allowed tag apart from the `stArea` tags.</td>
         </tr>
         <tr><td>rmd:SafeArea</td><td>FrameStruct</td><td>yes</td>
           <td>An area that cannot be cropped into. This area holds the relevant information within the image.<br>
-          The `rmd:MaxWidth` tag MAY be set to define at which point this region will be used. Otherwise the value is calculated implicitly. This is the only allowed tag apart from the `stArea` tags.
+          The `rmd:MaxWidth` tag <em class="rfc2119" title="MAY">MAY</em> be set to define at which point this region will be used. Otherwise the value is calculated implicitly. This is the only allowed tag apart from the `stArea` tags.
           </td>
         </tr>
         <tr><td>rmd:RecommendedFrames</td><td>Bag of FrameStruct</td><td>yes</td>
-          <td>A list of recommended crop regions for different output sizes. Those SHOULD only be considered if `Interpolation` is set to `step`.</td>
+          <td>A list of recommended crop regions for different output sizes. Those <em class="rfc2119" title="SHOULD">SHOULD</em> only be considered if `Interpolation` is set to `step`.</td>
         </tr>
         <tr><td>rmd:Interpolation</td><td>Closed Choice</td><td>yes</td>
-          <td>Specifies how intermediate sizes MUST be treated. The following values are allowed:<br/>
+          <td>Specifies how intermediate sizes <em class="rfc2119" title="MUST">MUST</em> be treated. The following values are allowed:<br>
           <dl>
-            <dt>linear</dt><dd>Cropping MAY happen between markers</dd>
-            <dt>step</dt><dd>Cropping SHOULD only happen on markers</dd>
+            <dt>linear</dt><dd>Cropping <em class="rfc2119" title="MAY">MAY</em> happen between markers</dd>
+            <dt>step</dt><dd>Cropping <em class="rfc2119" title="SHOULD">SHOULD</em> only happen on markers</dd>
           </dl>
           </td>
         </tr>
-      </table>
+      </tbody></table>
     </section>
 
-    <section>
-      <h2>Constraints</h3>
+    <section id="constraints" typeof="bibo:Chapter" resource="#constraints" property="bibo:hasPart">
+      <h3 id="h-constraints" resource="#h-constraints"><span property="xhv:role" resource="xhv:heading"><span class="secno">4.2 </span>Constraints</span></h3>
       <ul>
-        <li>The PivotPoint MUST be within the SafeArea and CropArea (if defined).</li>
-        <li>The SafeArea MUST be within the CropArea and all RecommendedFrames.</li>
+        <li>The PivotPoint <em class="rfc2119" title="MUST">MUST</em> be within the SafeArea and CropArea (if defined).</li>
+        <li>The SafeArea <em class="rfc2119" title="MUST">MUST</em> be within the CropArea and all RecommendedFrames.</li>
       </ul>
     </section>
 
-    <section>
-      <h2>Value Types</h2>
-      <section>
-        <h3>Allowed Derivates</h2>
+    <section id="value-types" typeof="bibo:Chapter" resource="#value-types" property="bibo:hasPart">
+      <h3 id="h-value-types" resource="#h-value-types"><span property="xhv:role" resource="xhv:heading"><span class="secno">4.3 </span>Value Types</span></h3>
+      <section id="allowed-derivates" typeof="bibo:Chapter" resource="#allowed-derivates" property="bibo:hasPart">
+        <h4 id="h-allowed-derivates" resource="#h-allowed-derivates"><span property="xhv:role" resource="xhv:heading"><span class="secno">4.3.1 </span>Allowed Derivates</span></h4>
         <p>Currently, there is only one rule:</p>
 
         <table>
-          <tr><th>Field Name</th><th>Value Type</th><th>Description</th></tr>
+          <tbody><tr><th>Field Name</th><th>Value Type</th><th>Description</th></tr>
           <tr><td>rmd:Crop</td><td>Closed Choice</td>
-            <td>This attribute controls the level of modification allowed by the license restrictions of the image.<br />
+            <td>This attribute controls the level of modification allowed by the license restrictions of the image.<br>
             The following values are allowed:
             <dl>
-              <dt>none</dt><dd>The image MUST NOT be cropped at all.<sup>1</sup></dd>
+              <dt>none</dt><dd>The image <em class="rfc2119" title="MUST NOT">MUST NOT</em> be cropped at all.<sup>1</sup></dd>
               <dt>visibilityOnly</dt>
-                <dd>Cropping MAY only be done to prevent the visibility of details within an image. Editorial integrity MUST NOT be compromised.</dd>
+                <dd>Cropping <em class="rfc2119" title="MAY">MAY</em> only be done to prevent the visibility of details within an image. Editorial integrity <em class="rfc2119" title="MUST NOT">MUST NOT</em> be compromised.</dd>
               <dt>all</dt>
                 <dd>This allows cropping for layout purposes as well.</dd>
             </dl>
             </td>
           </tr>
-        </table>
+        </tbody></table>
         <p>
-        <sup>1</sup> The <code>CropArea</code> rule MUST still be applied if it was set.</p>
+        <sup>1</sup> The <code>CropArea</code> rule <em class="rfc2119" title="MUST">MUST</em> still be applied if it was set.</p>
       </section><!-- Allowed Derivates -->
-      <section>
-        <h3>Frame Struct</h3>
-        <p>Extends [[!XMP]] Area (Rectangle). The fields are using the
+      <section id="frame-struct" typeof="bibo:Chapter" resource="#frame-struct" property="bibo:hasPart">
+        <h4 id="h-frame-struct" resource="#h-frame-struct"><span property="xhv:role" resource="xhv:heading"><span class="secno">4.3.2 </span>Frame Struct</span></h4>
+        <p>Extends [<cite><a class="bibref" href="#bib-XMP">XMP</a></cite>] Area (Rectangle). The fields are using the
           <code>stArea</code> and <code>rmd</code> namespaces.
         </p>
 
         <table>
-          <tr><th>Field Name</th><th>Value Type (Unit)</th>
+          <tbody><tr><th>Field Name</th><th>Value Type (Unit)</th>
           <th>Optional</th><th>Description</th></tr>
           <tr><td>stArea:x</td><td>Real (relative)</td><td>no<sup>1</sup></td>
           <td>X coordinate of the center of the area (point, rectangle)</td></tr>
@@ -232,32 +431,32 @@
           <tr><td>stArea:h</td><td>Real (relative)</td><td>no<sup>1</sup></td><td>Height of the area (rectangle)</td></tr>
 
           <tr><td>rmd:MinAspectRatio</td><td>Real (dp)</td><td>yes<sup>2</sup></td>
-            <td>A minimum aspect ratio MAY be set (in dp). For this frame to be considered the crop aspect ratio MUST be greater or equal.</td>
+            <td>A minimum aspect ratio <em class="rfc2119" title="MAY">MAY</em> be set (in dp). For this frame to be considered the crop aspect ratio <em class="rfc2119" title="MUST">MUST</em> be greater or equal.</td>
           </tr>
           <tr><td>rmd:MaxAspectRatio</td><td>Real (dp)</td><td>yes<sup>2</sup></td>
-            <td>A maximum aspect ratio MAY be set (in dp). For this frame to be considered the crop aspect ratio MUST be less or equal.</td>
+            <td>A maximum aspect ratio <em class="rfc2119" title="MAY">MAY</em> be set (in dp). For this frame to be considered the crop aspect ratio <em class="rfc2119" title="MUST">MUST</em> be less or equal.</td>
           </tr>
           <tr><td>rmd:MinWidth</td><td>Real (dp)</td><td>yes</td>
-            <td>If set, the crop with (in dp) MUST NOT be less for that frame to be considered.</td>
+            <td>If set, the crop with (in dp) <em class="rfc2119" title="MUST NOT">MUST NOT</em> be less for that frame to be considered.</td>
           </tr>
           <tr><td>rmd:MaxWidth</td><td>Real (dp)</td><td>yes<sup>2</sup></td>
-            <td>If set, the crop with (in dp) MUST NOT be larger for that frame to be considered.</td>
+            <td>If set, the crop with (in dp) <em class="rfc2119" title="MUST NOT">MUST NOT</em> be larger for that frame to be considered.</td>
           </tr>
-        </table>
+        </tbody></table>
         <p>
-          <sup>1</sup>The Area fields are OPTIONAL for the Default Crop Area.<br>
-          <sup>2</sup>Either MaxWidth or the AspectRatio fields MUST be specified for a frame to be considered.
+          <sup>1</sup>The Area fields are <em class="rfc2119" title="OPTIONAL">OPTIONAL</em> for the Default Crop Area.<br>
+          <sup>2</sup>Either MaxWidth or the AspectRatio fields <em class="rfc2119" title="MUST">MUST</em> be specified for a frame to be considered.
         </p>
       </section>
 
-      <section>
-        <h3>Dimension</h3>
+      <section id="dimension" typeof="bibo:Chapter" resource="#dimension" property="bibo:hasPart">
+        <h4 id="h-dimension" resource="#h-dimension"><span property="xhv:role" resource="xhv:heading"><span class="secno">4.3.3 </span>Dimension</span></h4>
         <p>
           The field namespace URI is <code>http://ns.adobe.com/xap/1.0/sType/Dimensions#</code> and the prefix is
           <code>stDim</code>.
         </p>
         <table>
-          <tr><th>Field Name</th><th>Value Type</th><th>Description</th></tr>
+          <tbody><tr><th>Field Name</th><th>Value Type</th><th>Description</th></tr>
           <tr>
             <td>stDim:w</td><td>Integer</td>
             <td>Width of the image</td>
@@ -270,74 +469,74 @@
             <td>stDim:unit</td><td>Closed Choice</td>
             <td>Currently, <em>pixel</em> is the only allowed value.</td>
           </tr>
-        </table>
+        </tbody></table>
       </section>
-      <section>
-        <h3>Area</h3>
+      <section id="area" typeof="bibo:Chapter" resource="#area" property="bibo:hasPart">
+        <h4 id="h-area" resource="#h-area"><span property="xhv:role" resource="xhv:heading"><span class="secno">4.3.4 </span>Area</span></h4>
         <p>
-          For reference, the XMP Area definition which is part of the [[!XMP]] namespace is described here. This structure represents an area or a point. Similar to Dimensions (stDim) the “unit” field describes the specific unit being used. The following table gives an overview of the different types and properties being used.
+          For reference, the XMP Area definition which is part of the [<cite><a class="bibref" href="#bib-XMP">XMP</a></cite>] namespace is described here. This structure represents an area or a point. Similar to Dimensions (stDim) the “unit” field describes the specific unit being used. The following table gives an overview of the different types and properties being used.
         </p>
         <table>
-          <tr><th>Type</th><th>Definition</th></tr>
+          <tbody><tr><th>Type</th><th>Definition</th></tr>
           <tr><td>Point</td><td>Single point at stArea:x, stArea:y</td></tr>
           <tr><td>Rectangle</td><td>Center at stArea:x, stArea:y. Width and height defined by stArea:w and stArea:h</td></tr>
-        </table>
+        </tbody></table>
         <p>
-          The field namespace URI is <code>http://ns.adobe.com/xmp/sType/Area#</code><br/>
+          The field namespace URI is <code>http://ns.adobe.com/xmp/sType/Area#</code><br>
           The field namespace prefix is <code>stArea</code>.
         </p>
       </section>
     </section><!-- Value Types -->
-    <section>
-      <h2>Compatibility with other standards</h2>
+    <section id="compatibility-with-other-standards" typeof="bibo:Chapter" resource="#compatibility-with-other-standards" property="bibo:hasPart">
+      <h3 id="h-compatibility-with-other-standards" resource="#h-compatibility-with-other-standards"><span property="xhv:role" resource="xhv:heading"><span class="secno">4.4 </span>Compatibility with other standards</span></h3>
       <p>
         The RMD standard combines all information needed for responsive images into one namespace. It is possible that some information is already stored in a different place. The following table specifies how existing metadata should be treated.
       </p>
       <table>
-        <tr><th>Field Name</th><th>Action</th></tr>
+        <tbody><tr><th>Field Name</th><th>Action</th></tr>
         <tr>
           <td>SubjectArea</td>
-          <td>If SubjectArea is a Point type, the value SHOULD be used as a placeholder value for rmd:PivotPoint. If it is a Rectangle type, it SHOULD be used as a placeholder for rmd:SafeArea.</td>
+          <td>If SubjectArea is a Point type, the value <em class="rfc2119" title="SHOULD">SHOULD</em> be used as a placeholder value for rmd:PivotPoint. If it is a Rectangle type, it <em class="rfc2119" title="SHOULD">SHOULD</em> be used as a placeholder for rmd:SafeArea.</td>
         </tr>
         <tr>
           <td>SubjectLocation</td>
-          <td>If SubjectLocation is specified and SubjectArea is not a Point type, then SubjectLocation SHOULD be used as a placeholder value for rmd:PivotPoint.</td>
+          <td>If SubjectLocation is specified and SubjectArea is not a Point type, then SubjectLocation <em class="rfc2119" title="SHOULD">SHOULD</em> be used as a placeholder value for rmd:PivotPoint.</td>
         </tr>
         <tr>
           <td>XMP-cc:License</td>
-          <td>If the image contains a popular restrictive license such as the Creative Commons NC license, rmd:AllowedDerivates MUST be set to none.
+          <td>If the image contains a popular restrictive license such as the Creative Commons NC license, rmd:AllowedDerivates <em class="rfc2119" title="MUST">MUST</em> be set to none.
           </td>
         </tr>
-      </table>
+      </tbody></table>
     </section>
 
   </section> <!-- XML Schema -->
 
-  <section>
-    <h1>Interpretation</h1>
-    <section>
-      <h2>Rules</h2>
+  <section id="interpretation" typeof="bibo:Chapter" resource="#interpretation" property="bibo:hasPart">
+    <!--OddPage--><h2 id="h-interpretation" resource="#h-interpretation"><span property="xhv:role" resource="xhv:heading"><span class="secno">5. </span>Interpretation</span></h2>
+    <section id="rules" typeof="bibo:Chapter" resource="#rules" property="bibo:hasPart">
+      <h3 id="h-rules" resource="#h-rules"><span property="xhv:role" resource="xhv:heading"><span class="secno">5.1 </span>Rules</span></h3>
       <p>
-        The default behavior for cropping MUST follow these rules:
-        <ul>
+        The default behavior for cropping <em class="rfc2119" title="MUST">MUST</em> follow these rules:
+        </p><ul>
           <li>
-            If the container element is larger or equal to the CropArea (or the width of the image), then the image MUST NOT be cropped.
+            If the container element is larger or equal to the CropArea (or the width of the image), then the image <em class="rfc2119" title="MUST NOT">MUST NOT</em> be cropped.
           </li>
           <li>
-            If the container element is smaller or equal to the MaxWidth value of the SafeArea, then the image MUST only be cropped to the safe area. This rule also applies if the calculated height is smaller than the height of the SafeArea.
+            If the container element is smaller or equal to the MaxWidth value of the SafeArea, then the image <em class="rfc2119" title="MUST">MUST</em> only be cropped to the safe area. This rule also applies if the calculated height is smaller than the height of the SafeArea.
           </li>
           <li>
-            If the SafeArea is not defined, then only one axis MAY be cropped, apart from the crop defined by the CropArea.
+            If the SafeArea is not defined, then only one axis <em class="rfc2119" title="MAY">MAY</em> be cropped, apart from the crop defined by the CropArea.
           </li>
           <li>
-            If the container size is in between the above two, then the behavior depends on the Interpolation field. If it is set to linear and the MaxWidth is set on the SafeArea tag, then the target width MUST be in between the SafeArea and the CropArea. If the Interpolation is set to step, then the closest matching recommended crop MUST be chosen. If it is not defined, then step SHOULD be assumed.
+            If the container size is in between the above two, then the behavior depends on the Interpolation field. If it is set to linear and the MaxWidth is set on the SafeArea tag, then the target width <em class="rfc2119" title="MUST">MUST</em> be in between the SafeArea and the CropArea. If the Interpolation is set to step, then the closest matching recommended crop <em class="rfc2119" title="MUST">MUST</em> be chosen. If it is not defined, then step <em class="rfc2119" title="SHOULD">SHOULD</em> be assumed.
           </li>
         </ul>
         All values have to be normalized to dp for the calculations.
-      </p>
+      <p></p>
     </section>
-    <section>
-      <h2>Process</h2>
+    <section id="process" typeof="bibo:Chapter" resource="#process" property="bibo:hasPart">
+      <h3 id="h-process" resource="#h-process"><span property="xhv:role" resource="xhv:heading"><span class="secno">5.2 </span>Process</span></h3>
       <p>
         The recommended way to process the image is described in the
         <a href="#activity-diagram">activity diagram</a> which is referenced in the appendix.
@@ -348,10 +547,10 @@
 
   </section> <!-- Interpretation -->
 
-  <section class="appendix">
-    <h1>Appendix</h1>
-    <section>
-      <h2>Use Cases</h2>
+  <section class="appendix" id="appendix" typeof="bibo:Chapter" resource="#appendix" property="bibo:hasPart">
+    <!--OddPage--><h2 id="h-appendix" resource="#h-appendix"><span property="xhv:role" resource="xhv:heading"><span class="secno">A. </span>Appendix</span></h2>
+    <section id="use-cases" typeof="bibo:Chapter" resource="#use-cases" property="bibo:hasPart">
+      <h3 id="h-use-cases" resource="#h-use-cases"><span property="xhv:role" resource="xhv:heading"><span class="secno">A.1 </span>Use Cases</span></h3>
       <p>The following is a collection of use cases where art direction is used:</p>
       <ul>
         <li><strong>Small devices</strong>: Smartphones, especially when held in portrait mode, simply cannot show an image the size the photographer has envisioned it. Sometimes details cannot be recognized in a small image due to their size. To keep up with &nbsp;editorial integrity, one has to find a balance between zooming in to show what is going on and&nbsp;the overall image composition.</li>
@@ -361,17 +560,17 @@
       </ul>
     </section><!-- Use cases -->
 
-    <section>
-      <h2>Prototype Implementations</h2>
-      <section>
-        <h3>Adding Metadata to an Image</h3>
+    <section id="prototype-implementations" typeof="bibo:Chapter" resource="#prototype-implementations" property="bibo:hasPart">
+      <h3 id="h-prototype-implementations" resource="#h-prototype-implementations"><span property="xhv:role" resource="xhv:heading"><span class="secno">A.2 </span>Prototype Implementations</span></h3>
+      <section id="adding-metadata-to-an-image" typeof="bibo:Chapter" resource="#adding-metadata-to-an-image" property="bibo:hasPart">
+        <h4 id="h-adding-metadata-to-an-image" resource="#h-adding-metadata-to-an-image"><span property="xhv:role" resource="xhv:heading"><span class="secno">A.2.1 </span>Adding Metadata to an Image</span></h4>
         <ul>
           <li><a href="https://github.com/universalimages/rmd-extension">Adobe Metadata UI Extension</a>: Allows editing the XMP metadata using the 'File Info' dialog in Adobe Photshop.</li>
           <li><a href="https://www.adobeexchange.com">Universal Images Marker Plugin</a>: A Photoshop extension that allows the user to display and set the crop regions on the actual image.</li>
         </ul>
       </section>
-      <section>
-        <h3>Processing the metadata</h3>
+      <section id="processing-the-metadata" typeof="bibo:Chapter" resource="#processing-the-metadata" property="bibo:hasPart">
+        <h4 id="h-processing-the-metadata" resource="#h-processing-the-metadata"><span property="xhv:role" resource="xhv:heading"><span class="secno">A.2.2 </span>Processing the metadata</span></h4>
         <ul>
           <li><p><a href="https://github.com/sbaechler/thumbor-universalimages">Universal Images Filter for Thumbor</a>: A reference implementation in Python for a web service that can handle images with embedded responsive metadata.</p></li>
           <li><p><a href="https://github.com/sbaechler/thumbor-rmd-demo">Thumbor Universal Image Prototype</a>: The dependencies required to set up an image server running Thumbor and Thumbor-Universalimages.</p></li>
@@ -379,10 +578,10 @@
       </section>
     </section>
 
-    <section>
-      <h2>Further Documentation</h2>
+    <section id="further-documentation" typeof="bibo:Chapter" resource="#further-documentation" property="bibo:hasPart">
+      <h3 id="h-further-documentation" resource="#h-further-documentation"><span property="xhv:role" resource="xhv:heading"><span class="secno">A.3 </span>Further Documentation</span></h3>
       <p>
-        <ul>
+        </p><ul>
           <li>
             <a href="https://github.com/universalimages/rmd/blob/master/example.xml">An example of the XMP containing responsive information.</a>
           </li>
@@ -391,7 +590,7 @@
           </li>
         </ul>
 
-      </p>
+      <p></p>
     </section>
 
   </section><!-- appendix -->
@@ -405,5 +604,10 @@
     ga('create', 'UA-46936819-3', 'auto');
     ga('send', 'pageview');
   </script>
-</body>
-</html>
+
+
+<section id="references" class="appendix" typeof="bibo:Chapter" resource="#references" property="bibo:hasPart"><!--OddPage--><h2 id="h-references" resource="#h-references"><span property="xhv:role" resource="xhv:heading"><span class="secno">B. </span>References</span></h2><section id="normative-references" typeof="bibo:Chapter" resource="#normative-references" property="bibo:hasPart"><h3 id="h-normative-references" resource="#h-normative-references"><span property="xhv:role" resource="xhv:heading"><span class="secno">B.1 </span>Normative references</span></h3><dl class="bibliography" resource=""><dt id="bib-CSS2">[CSS2]</dt><dd>Bert Bos; Tantek Çelik; Ian Hickson; Håkon Wium Lie et al. W3C. <a href="http://www.w3.org/TR/CSS2" property="dc:requires"><cite>Cascading Style Sheets Level 2 Revision 1 (CSS 2.1) Specification</cite></a>. 7 June 2011. W3C Recommendation. URL: <a href="http://www.w3.org/TR/CSS2" property="dc:requires">http://www.w3.org/TR/CSS2</a>
+</dd><dt id="bib-XMP">[XMP]</dt><dd>Adobe Systems Incorporated. ISO/IEC. <a href="http://www.iso.org/iso/home/store/catalogue_tc/catalogue_detail.htm?csnumber=57421" property="dc:requires"><cite>Extensible metadata platform (XMP) specification -- Part 1</cite></a>. 15 February 2012. URL: <a href="http://www.iso.org/iso/home/store/catalogue_tc/catalogue_detail.htm?csnumber=57421" property="dc:requires">http://www.iso.org/iso/home/store/catalogue_tc/catalogue_detail.htm?csnumber=57421</a>
+</dd></dl></section><section id="informative-references" typeof="bibo:Chapter" resource="#informative-references" property="bibo:hasPart"><h3 id="h-informative-references" resource="#h-informative-references"><span property="xhv:role" resource="xhv:heading"><span class="secno">B.2 </span>Informative references</span></h3><dl class="bibliography" resource=""><dt id="bib-Exif">[Exif]</dt><dd>Japan Electronics and Information Technology Industries Association. <a href="http://www.jeita.or.jp/japanese/standard/book/CP-3451C_E" property="dc:references"><cite>Exchangeable image file format for digital still cameras</cite></a>. May 2013. URL: <a href="http://www.jeita.or.jp/japanese/standard/book/CP-3451C_E" property="dc:references">http://www.jeita.or.jp/japanese/standard/book/CP-3451C_E</a>
+</dd><dt id="bib-html-picture-element">[html-picture-element]</dt><dd>Tab Atkins Jr.; Simon Pieters; Yoav Weiss; Marcos Caceres; Mathew Marquis. W3C. <a href="http://www.w3.org/TR/html-picture-element/" property="dc:references"><cite>The picture Element</cite></a>. 22 July 2014. W3C Note. URL: <a href="http://www.w3.org/TR/html-picture-element/" property="dc:references">http://www.w3.org/TR/html-picture-element/</a>
+</dd></dl></section></section><p role="navigation" id="back-to-top"><a href="#toc"><abbr title="Back to Top">↑</abbr></a></p><script async="" defer="" src="https://www.w3.org/scripts/TR/2016/fixup.js"></script></body></html>
